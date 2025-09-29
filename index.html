@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$MALLARD - The Duck That Became a Legend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #be88f4;
+            color: #4a148c;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(186, 104, 200, 0.15);
+            border-bottom: 3px solid #ab47bc;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 5px solid #9c27b0;
+            box-shadow: 0 8px 40px rgba(156, 39, 176, 0.4);
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #6a1b9a;
+            text-shadow: 2px 2px 8px rgba(106, 27, 154, 0.3);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #7b1fa2;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .social-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ab47bc, #ce93d8);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4);
+            font-size: 1.1em;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6);
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 50px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #ce93d8;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: #7b1fa2;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+
+        .buy-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            color: #6a1b9a;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(106, 27, 154, 0.2);
+            font-weight: bold;
+        }
+
+        .buy-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .buy-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            border: 3px solid #ce93d8;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
+        }
+
+        .buy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(156, 39, 176, 0.35);
+        }
+
+        .buy-card h3 {
+            color: #6a1b9a;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .buy-card p {
+            color: #7b1fa2;
+            margin-bottom: 25px;
+            font-size: 1em;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #ab47bc, #ce93d8);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+            transform: scale(1.05);
+        }
+
+        .storybook-section {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .book-wrapper {
+            perspective: 2000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+            min-height: 600px;
+        }
+
+        .book {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            transform-style: preserve-3d;
+        }
+
+        .page-container {
+            position: absolute;
+            width: 400px;
+            height: 500px;
+            right: 0;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transition: transform 1s;
+        }
+
+        .page-container.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page-front, .page-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #ffffff, #faf8fc);
+            border: 3px solid #ce93d8;
+            padding: 40px;
+            backface-visibility: hidden;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-front {
+            border-radius: 0 15px 15px 0;
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+            border-radius: 15px 0 0 15px;
+            background: linear-gradient(to left, #ffffff, #faf8fc);
+        }
+
+        .page-content h3 {
+            color: #6a1b9a;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .page-content p {
+            line-height: 2;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #7b1fa2;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: #ab47bc;
+            font-style: italic;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .book-spine {
+            position: absolute;
+            width: 400px;
+            height: 500px;
+            left: 0;
+            background: linear-gradient(to right, #faf8fc, #ffffff);
+            border: 3px solid #ce93d8;
+            border-right: none;
+            border-radius: 15px 0 0 15px;
+            box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-controls {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .book-btn {
+            padding: 15px 40px;
+            margin: 0 15px;
+            background: linear-gradient(135deg, #ab47bc, #ce93d8);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.3);
+        }
+
+        .book-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.5);
+        }
+
+        .book-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .chart-section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        #dexscreener-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3);
+            border: 3px solid #ce93d8;
+        }
+
+        @media(min-width: 1400px) {
+            #dexscreener-embed {
+                padding-bottom: 65%;
+            }
+        }
+
+        #dexscreener-embed iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(186, 104, 200, 0.15);
+            border-top: 3px solid #ab47bc;
+            margin-top: 80px;
+        }
+
+        .nft-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .nft-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nft-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ce93d8;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
+            transition: all 0.3s;
+        }
+
+        .nft-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3);
+        }
+
+        .nft-card h3 {
+            color: #6a1b9a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .nft-description, .burn-description {
+            color: #7b1fa2;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .burn-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe6f0 100%);
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .timer-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #ce93d8;
+            min-width: 100px;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2);
+        }
+
+        .timer-value {
+            display: block;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #6a1b9a;
+            margin-bottom: 5px;
+        }
+
+        .timer-label {
+            display: block;
+            font-size: 0.9em;
+            color: #7b1fa2;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .token-address {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 650px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 1em;
+            color: #6a1b9a;
+            border: 3px solid #ce93d8;
+            box-shadow: 0 4px 20px rgba(156, 39, 176, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .book {
+                width: 90vw;
+                height: 400px;
+            }
+
+            .page-container {
+                width: 45vw;
+                height: 400px;
+            }
+
+            .book-spine {
+                width: 45vw;
+                height: 400px;
+            }
+            
+            .page-front, .page-back {
+                padding: 25px;
+                font-size: 0.9em;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://github.com/mallardxrp/Mallard/raw/main/new%20mallard.jpg" alt="Mallard Logo" class="logo">
+        <h1>$MALLARD</h1>
+        <p class="tagline">From a Meme to a Movement<br>The duck that caught David Schwartz's attention and became a legend</p>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-label">💰 Market Cap</div>
+            <div class="stat-value" id="marketcap">Loading...</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">🔗 Trustlines</div>
+            <div class="stat-value" id="trustlines">Loading...</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">👥 Holders</div>
+            <div class="stat-value" id="holders">Loading...</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">📊 Total Supply</div>
+            <div class="stat-value">100M</div>
+        </div>
+    </div>
+
+    <div class="buy-section">
+        <h2 class="section-title">Buy $MALLARD</h2>
+        <div class="buy-options">
+            <div class="buy-card">
+                <h3>Horizon XRPL</h3>
+                <p>Leading XRPL DEX Platform</p>
+                <a href="https://horizon.xrplevm.org" class="buy-btn" target="_blank">Trade Now</a>
+            </div>
+            <div class="buy-card">
+                <h3>FirstLedger</h3>
+                <p>XRPL Trading Platform</p>
+                <a href="https://firstledger.net" class="buy-btn" target="_blank">Trade Now</a>
+            </div>
+            <div class="buy-card">
+                <h3>XMagnetic</h3>
+                <p>XRPL Exchange</p>
+                <a href="https://xmagnetic.org" class="buy-btn" target="_blank">Trade Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="storybook-section">
+        <h2 class="section-title">📖 The Mallard Story</h2>
+        
+        <div class="book-wrapper">
+            <div class="book">
+                <div class="book-spine"></div>
+                
+                <div class="page-container" id="page0">
+                    <div class="page-front">
+                        <div class="page-content">
+                            <h3>Chapter 1: The Beginning</h3>
+                            <p>A mysterious NFT + token dropped out of nowhere. No big promos, no whitelist, just vibes.</p>
+                            <p>The artist had been quietly building since 2020, but it all started with a duck...</p>
+                            <p>A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
+                            <p>That duck profile pic became the muse. Mallard Dev took it and ran.</p>
+                            <div class="page-number">1</div>
+                        </div>
+                    </div>
+                    <div class="page-back">
+                        <div class="page-content">
+                            <h3>Chapter 2: The Community Awakens</h3>
+                            <p>The Telegram chat opened. Small at first, but by August 15, the Chads started flowing in.</p>
+                            <p>Raids began. Energy built fast.</p>
+                            <p>This wasn't just a meme coin anymore—it was a movement.</p>
+                            <p>The community was growing, united by a duck and a dream.</p>
+                            <div class="page-number">2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-container" id="page1">
+                    <div class="page-front">
+                        <div class="page-content">
+                            <h3>Chapter 3: David Watches</h3>
+                            <p>The community raided @JoelKatz. The dev sent an NFT directly to David's wallet.</p>
+                            <p>Then... a mysterious "@joelkatz" joined our Telegram.</p>
+                            <p>The real David Schwartz was watching.</p>
+                            <p>The legend was becoming real. The creator of the XRP Ledger had noticed the duck.</p>
+                            <div class="page-number">3</div>
+                        </div>
+                    </div>
+                    <div class="page-back">
+                        <div class="page-content">
+                            <h3>Chapter 4: The Signs</h3>
+                            <p>David tweets a random McDonald's ad. Right at the start—a mallard duck quacks on screen.</p>
+                            <p>Our first major clue. The genius speaks in code.</p>
+                            <p>Three ducks across three posts. Old MacDonald (1 duck), Telegram emoji (2 ducks), Music video (3 ducks).</p>
+                            <p>321... 123. David's ducks are in a row.</p>
+                            <div class="page-number">4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-container" id="page2">
+                    <div class="page-front">
+                        <div class="page-content">
+                            <h3>Chapter 5: Join the Flock</h3>
+                            <p>What started as a meme is turning into a legend.</p>
+                            <p>The lines between art, trolling, and reality are blurring.</p>
+                            <p>David's watching. JoelKatz is in the chat.</p>
+                            <p>The duck is loose.</p>
+                            <p style="text-align: center; margin-top: 60px; font-weight: bold; color: #6a1b9a; font-size: 1.3em;">🦆 Welcome to the Mallard Movement 🦆</p>
+                            <div class="page-number">5</div>
+                        </div>
+                    </div>
+                    <div class="page-back"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="book-controls">
+            <button class="book-btn" id="prevBtn" disabled>← Previous</button>
+            <button class="book-btn" id="nextBtn">Next →</button>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <h2 class="section-title">📈 Live Chart</h2>
+        <div id="dexscreener-embed">
+            <iframe src="https://dexscreener.com/xrpl/4D414C4C41524400000000000000000000000000.raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN_XRP?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+        </div>
+    </div>
+
+    <div class="nft-section">
+        <h2 class="section-title">🎨 NFT</h2>
+        <div class="nft-container">
+            <div class="nft-card">
+                <h3>Coming Soon</h3>
+                <p class="nft-description">Exciting NFT drops are on the horizon. Stay tuned for updates!</p>
+            </div>
+            <div class="nft-card burn-card">
+                <h3>🔥 Burn Your V2 Mallard NFTs</h3>
+                <p class="burn-description">Deadline for burn within:</p>
+                <div class="countdown-timer" id="countdown">
+                    <div class="timer-box">
+                        <span class="timer-value" id="hours">00</span>
+                        <span class="timer-label">Hours</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="timer-value" id="minutes">00</span>
+                        <span class="timer-label">Minutes</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="timer-value" id="seconds">00</span>
+                        <span class="timer-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3 style="color: #6a1b9a; font-size: 2em; margin-bottom: 30px;">Join the Flock 🦆</h3>
+        
+        <div class="socials">
+            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">📱 Telegram</a>
+            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">🐦 Twitter/X</a>
+            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">🎵 TikTok</a>
+            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">▶️ YouTube</a>
+            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">📸 Instagram</a>
+            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">🔗 Linktree</a>
+            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">🔍 XRPScan</a>
+        </div>
+
+        <h3 style="color: #6a1b9a; font-size: 2em; margin-bottom: 20px; margin-top: 50px;">Token Address</h3>
+        <div class="token-address">
+            raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN
+        </div>
+        <p style="margin-top: 20px; color: #7b1fa2; font-weight: 600;">Contract: 4D414C4C41524400000000000000000000000000</p>
+        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">© 2025 Mallard | The Duck That Became a Legend 🦆</p>
+    </div>
+
+    <script src="https://unpkg.com/xrpl/dist/xrpl-latest-min.js"></script>
+    <script>
+        const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
+        const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
+        const TOTAL_SUPPLY = 100000000;
+        
+        const WS_SERVERS = [
+            'wss://s1.ripple.com',
+            'wss://s2.ripple.com',
+            'wss://xrplcluster.com'
+        ];
+
+        let currentPage = 0;
+        const totalPages = 3;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateButtons() {
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage >= totalPages - 1;
+        }
+
+        function flipPage(direction) {
+            if (direction === 'next' && currentPage < totalPages - 1) {
+                const pageElement = document.getElementById('page' + currentPage);
+                pageElement.classList.add('flipped');
+                currentPage++;
+                updateButtons();
+            } else if (direction === 'prev' && currentPage > 0) {
+                currentPage--;
+                const pageElement = document.getElementById('page' + currentPage);
+                pageElement.classList.remove('flipped');
+                updateButtons();
+            }
+        }
+
+        nextBtn.addEventListener('click', () => flipPage('next'));
+        prevBtn.addEventListener('click', () => flipPage('prev'));
+
+        async function fetchXRPLData() {
+            console.log('=== Starting XRPL Data Fetch via WebSocket ===');
+            
+            for (let wsUrl of WS_SERVERS) {
+                try {
+                    console.log(`\n--- Trying WebSocket: ${wsUrl} ---`);
+                    
+                    const result = await new Promise((resolve, reject) => {
+                        const ws = new WebSocket(wsUrl);
+                        const timeout = setTimeout(() => {
+                            ws.close();
+                            reject(new Error('Connection timeout'));
+                        }, 10000);
+
+                        let allLines = [];
+                        let currentMarker = undefined;
+                        let requestId = 1;
+
+                        ws.onopen = () => {
+                            console.log('✓ WebSocket connected');
+                            clearTimeout(timeout);
+                            
+                            const request = {
+                                id: requestId,
+                                command: 'account_lines',
+                                account: MALLARD_ISSUER,
+                                ledger_index: 'validated',
+                                limit: 400
+                            };
+                            
+                            console.log('Sending request:', request);
+                            ws.send(JSON.stringify(request));
+                        };
+
+                        ws.onmessage = (event) => {
+                            try {
+                                const data = JSON.parse(event.data);
+                                console.log('Received response:', data);
+
+                                if (data.status === 'success' && data.result) {
+                                    const lines = data.result.lines || [];
+                                    allLines = allLines.concat(lines);
+                                    
+                                    console.log(`Got ${lines.length} lines (Total: ${allLines.length})`);
+
+                                    if (data.result.marker && allLines.length < 8000) {
+                                        currentMarker = data.result.marker;
+                                        requestId++;
+                                        
+                                        const nextRequest = {
+                                            id: requestId,
+                                            command: 'account_lines',
+                                            account: MALLARD_ISSUER,
+                                            ledger_index: 'validated',
+                                            limit: 400,
+                                            marker: currentMarker
+                                        };
+                                        
+                                        console.log('Requesting next page...');
+                                        ws.send(JSON.stringify(nextRequest));
+                                    } else {
+                                        console.log('✓ Finished fetching all pages');
+                                        ws.close();
+                                        resolve(allLines);
+                                    }
+                                } else if (data.error) {
+                                    ws.close();
+                                    reject(new Error(data.error_message || data.error));
+                                }
+                            } catch (err) {
+                                console.error('Parse error:', err);
+                                ws.close();
+                                reject(err);
+                            }
+                        };
+
+                        ws.onerror = (error) => {
+                            console.error('WebSocket error:', error);
+                            clearTimeout(timeout);
+                            reject(new Error('WebSocket connection failed'));
+                        };
+
+                        ws.onclose = () => {
+                            console.log('WebSocket closed');
+                        };
+                    });
+
+                    if (result && result.length > 0) {
+                        console.log(`\n✓ SUCCESS: Got ${result.length} total trust lines`);
+                        
+                        let holdersWithBalance = 0;
+                        
+                        for (let line of result) {
+                            const balance = parseFloat(line.balance);
+                            
+                            if (!isNaN(balance) && balance !== 0) {
+                                holdersWithBalance++;
+                            }
+                        }
+                        
+                        document.getElementById('trustlines').textContent = result.length.toLocaleString();
+                        document.getElementById('holders').textContent = holdersWithBalance.toLocaleString();
+                        
+                        console.log('\n=== FINAL RESULTS ===');
+                        console.log('Trustlines:', result.length);
+                        console.log('Holders:', holdersWithBalance);
+                        
+                        return;
+                    }
+
+                } catch (error) {
+                    console.error(`\n❌ ERROR with ${wsUrl}:`);
+                    console.error('Error:', error.message);
+                    continue;
+                }
+            }
+
+            console.error('\n❌ ALL SERVERS FAILED');
+            document.getElementById('trustlines').textContent = 'Error';
+            document.getElementById('holders').textContent = 'Error';
+        }
+
+        async function fetchMarketCap() {
+            try {
+                const searches = [
+                    `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
+                    'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
+                    `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
+                ];
+
+                for (let url of searches) {
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        
+                        let pairs = data.pairs || (data.pair ? [data.pair] : []);
+
+                        for (let pair of pairs) {
+                            if (!pair) continue;
+                            
+                            const isXRPL = pair.chainId === 'xrpl' || 
+                                          pair.dexId === 'xrpl' ||
+                                          (pair.baseToken && pair.baseToken.address && 
+                                           pair.baseToken.address.includes(MALLARD_ISSUER));
+                            
+                            if (isXRPL) {
+                                const marketCap = pair.fdv || pair.marketCap;
+                                if (marketCap && marketCap > 0) {
+                                    let formatted;
+                                    if (marketCap >= 1000000) {
+                                        formatted = '$' + (marketCap / 1000000).toFixed(2) + 'M';
+                                    } else if (marketCap >= 1000) {
+                                        formatted = '$' + (marketCap / 1000).toFixed(2) + 'K';
+                                    } else {
+                                        formatted = '$' + marketCap.toFixed(2);
+                                    }
+                                    document.getElementById('marketcap').textContent = formatted;
+                                    return;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        continue;
+                    }
+                }
+                
+                document.getElementById('marketcap').textContent = 'Coming Soon';
+                
+            } catch (error) {
+                document.getElementById('marketcap').textContent = 'Coming Soon';
+            }
+        }
+
+        fetchXRPLData();
+        fetchMarketCap();
+        setInterval(fetchXRPLData, 30000);
+        setInterval(fetchMarketCap, 30000);
+        updateButtons();
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(13, 15, 0, 0); // 1:15 PM tomorrow
+            
+            const distance = tomorrow - now;
+            
+            if (distance < 0) {
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            
+            const hours = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
