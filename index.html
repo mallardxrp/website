@@ -37,11 +37,37 @@
 
         .banner {
             width: auto;
+            max-width: 95%;
             height: auto;
             margin: 30px auto 40px;
             display: block;
             filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
             opacity: 0.9;
+        }
+
+        /* Mobile optimization */
+        @media(max-width: 767px) {
+            .banner {
+                max-width: 100%;
+                margin: 20px auto 30px;
+            }
+        }
+
+        /* Tablet optimization */
+        @media(min-width: 768px) and (max-width: 1023px) {
+            .banner {
+                max-width: 85%;
+                margin: 25px auto 35px;
+            }
+        }
+
+        /* Desktop optimization */
+        @media(min-width: 1024px) {
+            .banner {
+                max-width: 1200px;
+                width: auto;
+                margin: 30px auto 40px;
+            }
         }
 
         h1 {
@@ -489,7 +515,6 @@
         <img src="https://github.com/mallardxrp/Mallard/raw/main/new%20mallard.jpg" alt="Mallard Logo" class="logo">
         <h1>$MALLARD</h1>
         <img src="https://github.com/mallardxrp/Mallard/raw/main/new%20banner%20(2).png" alt="Mallard Banner" class="banner">
-        <p class="tagline">From a Meme to a Movement<br>The duck that caught David Schwartz's attention and became a legend</p>
     </div>
 
     <div class="stats-container">
