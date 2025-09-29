@@ -34,6 +34,15 @@
             object-fit: cover;
         }
 
+        h1 {
+            font-size: 4em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
         .banner {
             width: auto;
             max-width: 95%;
@@ -44,7 +53,6 @@
             opacity: 0.9;
         }
 
-        /* Mobile optimization */
         @media(max-width: 767px) {
             .banner {
                 max-width: 100%;
@@ -52,7 +60,6 @@
             }
         }
 
-        /* Tablet optimization */
         @media(min-width: 768px) and (max-width: 1023px) {
             .banner {
                 max-width: 85%;
@@ -60,56 +67,12 @@
             }
         }
 
-        /* Desktop optimization */
         @media(min-width: 1024px) {
             .banner {
                 max-width: 1200px;
                 width: auto;
                 margin: 30px auto 40px;
             }
-        }
-
-        h1 {
-            font-size: 4em;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            margin-bottom: 15px;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .tagline {
-            font-size: 1.3em;
-            color: #7b1fa2;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .social-btn {
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #ab47bc, #ce93d8);
-            border: none;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4);
-            font-size: 1.1em;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6);
-            background: linear-gradient(135deg, #9c27b0, #ba68c8);
         }
 
         .stats-container {
@@ -217,126 +180,105 @@
         }
 
         .storybook-section {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 80px auto;
             padding: 0 20px;
         }
 
-        .book-wrapper {
-            perspective: 2000px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 50px auto;
-            min-height: 600px;
-        }
-
-        .book {
+        .cards-container {
             position: relative;
-            width: 800px;
-            height: 500px;
-            transform-style: preserve-3d;
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .page-container {
-            position: absolute;
-            width: 400px;
-            height: 500px;
-            right: 0;
-            transform-style: preserve-3d;
-            transform-origin: left;
-            transition: transform 1s;
+        .card-stack {
+            position: relative;
+            width: 600px;
+            height: 550px;
+            margin-bottom: 50px;
+            cursor: pointer;
         }
 
-        .page-container.flipped {
-            transform: rotateY(-180deg);
-        }
-
-        .page-front, .page-back {
+        .story-card {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #ffffff, #faf8fc);
-            border: 3px solid #ce93d8;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
             padding: 40px;
-            backface-visibility: hidden;
-            overflow-y: auto;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .page-front {
-            border-radius: 0 15px 15px 0;
-        }
-
-        .page-back {
-            transform: rotateY(180deg);
-            border-radius: 15px 0 0 15px;
-            background: linear-gradient(to left, #ffffff, #faf8fc);
-        }
-
-        .page-content h3 {
-            color: #6a1b9a;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-
-        .page-content p {
-            line-height: 2;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            color: #7b1fa2;
-        }
-
-        .page-number {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            color: #ab47bc;
-            font-style: italic;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .book-spine {
-            position: absolute;
-            width: 400px;
-            height: 500px;
-            left: 0;
-            background: linear-gradient(to right, #faf8fc, #ffffff);
-            border: 3px solid #ce93d8;
-            border-right: none;
-            border-radius: 15px 0 0 15px;
-            box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .book-controls {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .book-btn {
-            padding: 15px 40px;
-            margin: 0 15px;
-            background: linear-gradient(135deg, #ab47bc, #ce93d8);
-            border: none;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            transition: all 0.3s;
+            user-select: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-title {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #000000;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .card-count {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
             font-size: 1.1em;
-            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.3);
+            font-weight: bold;
+            color: #000000;
+            text-shadow: none;
         }
 
-        .book-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.5);
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .book-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
+        .card-body p {
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1.3em;
+            color: #000000;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+            text-align: left;
+        }
+
+        .card-highlight {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4em;
+            color: #000000;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+        }
+
+        .swipe-instructions {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
 
         .chart-section {
@@ -348,24 +290,22 @@
         #dexscreener-embed {
             position: relative;
             width: 100%;
-            padding-bottom: 200%; /* Perfect height for mobile */
+            padding-bottom: 200%;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3);
             border: 3px solid #ce93d8;
         }
 
-        /* Medium screens (tablets) */
         @media(min-width: 768px) and (max-width: 1023px) {
             #dexscreener-embed {
-                padding-bottom: 150%; /* Moderate height for tablets */
+                padding-bottom: 150%;
             }
         }
 
-        /* Large screens (laptops and desktops) */
         @media(min-width: 1024px) {
             #dexscreener-embed {
-                padding-bottom: 65%; /* Normal height for PC/laptops */
+                padding-bottom: 65%;
             }
         }
 
@@ -376,14 +316,6 @@
             top: 0;
             left: 0;
             border: 0;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(186, 104, 200, 0.15);
-            border-top: 3px solid #ab47bc;
-            margin-top: 80px;
         }
 
         .nft-section {
@@ -464,6 +396,41 @@
             text-transform: uppercase;
         }
 
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(186, 104, 200, 0.15);
+            border-top: 3px solid #ab47bc;
+            margin-top: 80px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .social-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ab47bc, #ce93d8);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4);
+            font-size: 1.1em;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6);
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+        }
+
         .token-address {
             background: white;
             padding: 20px;
@@ -483,28 +450,30 @@
                 font-size: 2.5em;
             }
             
-            .book {
+            .card-stack {
                 width: 90vw;
-                height: 400px;
-            }
-
-            .page-container {
-                width: 45vw;
-                height: 400px;
-            }
-
-            .book-spine {
-                width: 45vw;
-                height: 400px;
+                max-width: 450px;
+                height: 500px;
             }
             
-            .page-front, .page-back {
-                padding: 25px;
-                font-size: 0.9em;
+            .story-card {
+                padding: 30px;
+            }
+            
+            .card-title {
+                font-size: 1.8em;
+            }
+            
+            .card-body p {
+                font-size: 1.1em;
             }
 
             .section-title {
                 font-size: 2.2em;
+            }
+
+            .storybook-section {
+                max-width: 500px;
             }
         }
     </style>
@@ -557,78 +526,63 @@
     </div>
 
     <div class="storybook-section">
-        <h2 class="section-title">📖 The Mallard Story</h2>
+        <h2 class="section-title">🃏 The Mallard Story</h2>
         
-        <div class="book-wrapper">
-            <div class="book">
-                <div class="book-spine"></div>
+        <div class="cards-container">
+            <div class="card-stack" id="cardStack">
+                <!-- Card 4 (bottom) -->
+                <div class="story-card" data-index="3" id="card3" onclick="cardClicked(event)">
+                    <div class="card-header">
+                        <span class="card-title">Join the Flock</span>
+                        <span class="card-count">4/4</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Three ducks across three posts. Old MacDonald, Telegram emoji, Music video.</p>
+                        <p>321... 123. David's ducks are in a row. The duck is loose.</p>
+                        <div class="card-highlight">🦆 Welcome to the Movement 🦆</div>
+                    </div>
+                </div>
                 
-                <div class="page-container" id="page0">
-                    <div class="page-front">
-                        <div class="page-content">
-                            <h3>Chapter 1: The Beginning</h3>
-                            <p>A mysterious NFT + token dropped out of nowhere. No big promos, no whitelist, just vibes.</p>
-                            <p>The artist had been quietly building since 2020, but it all started with a duck...</p>
-                            <p>A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
-                            <p>That duck profile pic became the muse. Mallard Dev took it and ran.</p>
-                            <div class="page-number">1</div>
-                        </div>
+                <!-- Card 3 -->
+                <div class="story-card" data-index="2" id="card2" onclick="cardClicked(event)">
+                    <div class="card-header">
+                        <span class="card-title">David Watches</span>
+                        <span class="card-count">3/4</span>
                     </div>
-                    <div class="page-back">
-                        <div class="page-content">
-                            <h3>Chapter 2: The Community Awakens</h3>
-                            <p>The Telegram chat opened. Small at first, but by August 15, the Chads started flowing in.</p>
-                            <p>Raids began. Energy built fast.</p>
-                            <p>This wasn't just a meme coin anymore—it was a movement.</p>
-                            <p>The community was growing, united by a duck and a dream.</p>
-                            <div class="page-number">2</div>
-                        </div>
+                    <div class="card-body">
+                        <p>The community raided @JoelKatz. The dev sent an NFT directly to David's wallet.</p>
+                        <p>Then... a mysterious "@joelkatz" joined our Telegram. The creator of XRP Ledger was watching.</p>
                     </div>
                 </div>
-
-                <div class="page-container" id="page1">
-                    <div class="page-front">
-                        <div class="page-content">
-                            <h3>Chapter 3: David Watches</h3>
-                            <p>The community raided @JoelKatz. The dev sent an NFT directly to David's wallet.</p>
-                            <p>Then... a mysterious "@joelkatz" joined our Telegram.</p>
-                            <p>The real David Schwartz was watching.</p>
-                            <p>The legend was becoming real. The creator of the XRP Ledger had noticed the duck.</p>
-                            <div class="page-number">3</div>
-                        </div>
+                
+                <!-- Card 2 -->
+                <div class="story-card" data-index="1" id="card1" onclick="cardClicked(event)">
+                    <div class="card-header">
+                        <span class="card-title">Community Awakens</span>
+                        <span class="card-count">2/4</span>
                     </div>
-                    <div class="page-back">
-                        <div class="page-content">
-                            <h3>Chapter 4: The Signs</h3>
-                            <p>David tweets a random McDonald's ad. Right at the start—a mallard duck quacks on screen.</p>
-                            <p>Our first major clue. The genius speaks in code.</p>
-                            <p>Three ducks across three posts. Old MacDonald (1 duck), Telegram emoji (2 ducks), Music video (3 ducks).</p>
-                            <p>321... 123. David's ducks are in a row.</p>
-                            <div class="page-number">4</div>
-                        </div>
+                    <div class="card-body">
+                        <p>The Telegram chat opened. By August 15, the Chads started flowing in.</p>
+                        <p>Raids began. Energy built fast. This wasn't just a meme coin anymore—it was a movement.</p>
                     </div>
                 </div>
-
-                <div class="page-container" id="page2">
-                    <div class="page-front">
-                        <div class="page-content">
-                            <h3>Chapter 5: Join the Flock</h3>
-                            <p>What started as a meme is turning into a legend.</p>
-                            <p>The lines between art, trolling, and reality are blurring.</p>
-                            <p>David's watching. JoelKatz is in the chat.</p>
-                            <p>The duck is loose.</p>
-                            <p style="text-align: center; margin-top: 60px; font-weight: bold; color: #6a1b9a; font-size: 1.3em;">🦆 Welcome to the Mallard Movement 🦆</p>
-                            <div class="page-number">5</div>
-                        </div>
+                
+                <!-- Card 1 (top) -->
+                <div class="story-card active" data-index="0" id="card0" onclick="cardClicked(event)">
+                    <div class="card-header">
+                        <span class="card-title">The Beginning</span>
+                        <span class="card-count">1/4</span>
                     </div>
-                    <div class="page-back"></div>
+                    <div class="card-body">
+                        <p>A mysterious NFT drop appeared out of nowhere. No big promos, no whitelist, just vibes.</p>
+                        <p>It all started with a duck... A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="book-controls">
-            <button class="book-btn" id="prevBtn" disabled>← Previous</button>
-            <button class="book-btn" id="nextBtn">Next →</button>
+            
+            <div class="swipe-instructions">
+                <span>👈 Click left or right to navigate 👉</span>
+            </div>
         </div>
     </div>
 
@@ -700,33 +654,80 @@
             'wss://xrplcluster.com'
         ];
 
-        let currentPage = 0;
-        const totalPages = 3;
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        function updateButtons() {
-            prevBtn.disabled = currentPage === 0;
-            nextBtn.disabled = currentPage >= totalPages - 1;
-        }
-
-        function flipPage(direction) {
-            if (direction === 'next' && currentPage < totalPages - 1) {
-                const pageElement = document.getElementById('page' + currentPage);
-                pageElement.classList.add('flipped');
-                currentPage++;
-                updateButtons();
-            } else if (direction === 'prev' && currentPage > 0) {
-                currentPage--;
-                const pageElement = document.getElementById('page' + currentPage);
-                pageElement.classList.remove('flipped');
-                updateButtons();
+        // SWIPE CARDS FUNCTIONALITY
+        var currentCard = 3;
+        
+        function updateCards() {
+            for (var i = 0; i <= 3; i++) {
+                var card = document.getElementById('card' + i);
+                if (card) {
+                    if (i === currentCard) {
+                        // Active card - full size and visible
+                        card.style.zIndex = '10';
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1) translateY(0px)';
+                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    } else if (i === currentCard - 1) {
+                        // Second card
+                        card.style.zIndex = '8';
+                        card.style.opacity = '0.8';
+                        card.style.transform = 'scale(0.97) translateY(5px)';
+                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                    } else if (i === currentCard - 2) {
+                        // Third card
+                        card.style.zIndex = '6';
+                        card.style.opacity = '0.6';
+                        card.style.transform = 'scale(0.94) translateY(10px)';
+                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    } else {
+                        // Bottom cards
+                        card.style.zIndex = '4';
+                        card.style.opacity = '0.3';
+                        card.style.transform = 'scale(0.9) translateY(20px)';
+                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    }
+                }
             }
         }
+        
+        function nextCard() {
+            currentCard = (currentCard + 1) % 4;
+            updateCards();
+        }
+        
+        function prevCard() {
+            currentCard = (currentCard - 1 + 4) % 4;
+            updateCards();
+        }
+        
+        function cardClicked(event) {
+            var stack = document.getElementById('cardStack');
+            var rect = stack.getBoundingClientRect();
+            var clickX = event.clientX - rect.left;
+            var width = rect.width;
+            
+            if (clickX < width / 2) {
+                prevCard();
+            } else {
+                nextCard();
+            }
+        }
+        
+        // Keyboard support
+        document.onkeydown = function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevCard();
+            } else if (e.key === 'ArrowRight') {
+                nextCard();
+            }
+        };
+        
+        // Initialize cards
+        setTimeout(function() {
+            updateCards();
+        }, 100);
 
-        nextBtn.addEventListener('click', () => flipPage('next'));
-        prevBtn.addEventListener('click', () => flipPage('prev'));
-
+        // XRPL DATA FETCHING
         async function fetchXRPLData() {
             console.log('=== Starting XRPL Data Fetch via WebSocket ===');
             
@@ -782,157 +783,3 @@
                                             account: MALLARD_ISSUER,
                                             ledger_index: 'validated',
                                             limit: 400,
-                                            marker: currentMarker
-                                        };
-                                        
-                                        console.log('Requesting next page...');
-                                        ws.send(JSON.stringify(nextRequest));
-                                    } else {
-                                        console.log('✓ Finished fetching all pages');
-                                        ws.close();
-                                        resolve(allLines);
-                                    }
-                                } else if (data.error) {
-                                    ws.close();
-                                    reject(new Error(data.error_message || data.error));
-                                }
-                            } catch (err) {
-                                console.error('Parse error:', err);
-                                ws.close();
-                                reject(err);
-                            }
-                        };
-
-                        ws.onerror = (error) => {
-                            console.error('WebSocket error:', error);
-                            clearTimeout(timeout);
-                            reject(new Error('WebSocket connection failed'));
-                        };
-
-                        ws.onclose = () => {
-                            console.log('WebSocket closed');
-                        };
-                    });
-
-                    if (result && result.length > 0) {
-                        console.log(`\n✓ SUCCESS: Got ${result.length} total trust lines`);
-                        
-                        let holdersWithBalance = 0;
-                        
-                        for (let line of result) {
-                            const balance = parseFloat(line.balance);
-                            
-                            if (!isNaN(balance) && balance !== 0) {
-                                holdersWithBalance++;
-                            }
-                        }
-                        
-                        document.getElementById('trustlines').textContent = result.length.toLocaleString();
-                        document.getElementById('holders').textContent = holdersWithBalance.toLocaleString();
-                        
-                        console.log('\n=== FINAL RESULTS ===');
-                        console.log('Trustlines:', result.length);
-                        console.log('Holders:', holdersWithBalance);
-                        
-                        return;
-                    }
-
-                } catch (error) {
-                    console.error(`\n❌ ERROR with ${wsUrl}:`);
-                    console.error('Error:', error.message);
-                    continue;
-                }
-            }
-
-            console.error('\n❌ ALL SERVERS FAILED');
-            document.getElementById('trustlines').textContent = 'Error';
-            document.getElementById('holders').textContent = 'Error';
-        }
-
-        async function fetchMarketCap() {
-            try {
-                const searches = [
-                    `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
-                    'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
-                    `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
-                ];
-
-                for (let url of searches) {
-                    try {
-                        const response = await fetch(url);
-                        const data = await response.json();
-                        
-                        let pairs = data.pairs || (data.pair ? [data.pair] : []);
-
-                        for (let pair of pairs) {
-                            if (!pair) continue;
-                            
-                            const isXRPL = pair.chainId === 'xrpl' || 
-                                          pair.dexId === 'xrpl' ||
-                                          (pair.baseToken && pair.baseToken.address && 
-                                           pair.baseToken.address.includes(MALLARD_ISSUER));
-                            
-                            if (isXRPL) {
-                                const marketCap = pair.fdv || pair.marketCap;
-                                if (marketCap && marketCap > 0) {
-                                    let formatted;
-                                    if (marketCap >= 1000000) {
-                                        formatted = ' + (marketCap / 1000000).toFixed(2) + 'M';
-                                    } else if (marketCap >= 1000) {
-                                        formatted = ' + (marketCap / 1000).toFixed(2) + 'K';
-                                    } else {
-                                        formatted = ' + marketCap.toFixed(2);
-                                    }
-                                    document.getElementById('marketcap').textContent = formatted;
-                                    return;
-                                }
-                            }
-                        }
-                    } catch (err) {
-                        continue;
-                    }
-                }
-                
-                document.getElementById('marketcap').textContent = 'Coming Soon';
-                
-            } catch (error) {
-                document.getElementById('marketcap').textContent = 'Coming Soon';
-            }
-        }
-
-        fetchXRPLData();
-        fetchMarketCap();
-        setInterval(fetchXRPLData, 30000);
-        setInterval(fetchMarketCap, 30000);
-        updateButtons();
-
-        // Countdown Timer
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(13, 15, 0, 0); // 1:15 PM tomorrow
-            
-            const distance = tomorrow - now;
-            
-            if (distance < 0) {
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
-            }
-            
-            const hours = Math.floor(distance / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
-</body>
-</html>
