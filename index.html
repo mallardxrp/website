@@ -313,14 +313,21 @@
         #dexscreener-embed {
             position: relative;
             width: 100%;
-            padding-bottom: 160%; /* Increased height for mobile/tablet */
+            padding-bottom: 250%; /* Much taller for mobile/tablet */
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3);
             border: 3px solid #ce93d8;
         }
 
-        /* Only reduce height for larger screens (laptops and desktops) */
+        /* Medium screens (tablets) */
+        @media(min-width: 768px) and (max-width: 1023px) {
+            #dexscreener-embed {
+                padding-bottom: 180%; /* Moderate height for tablets */
+            }
+        }
+
+        /* Large screens (laptops and desktops) */
         @media(min-width: 1024px) {
             #dexscreener-embed {
                 padding-bottom: 65%; /* Normal height for PC/laptops */
