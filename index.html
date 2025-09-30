@@ -5,477 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$MALLARD - The Duck That Became a Legend</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #be88f4;
-            color: #4a148c;
-            overflow-x: hidden;
-        }
-
-        .header {
-            text-align: center;
-            padding: 60px 20px;
-            background: rgba(186, 104, 200, 0.15);
-        }
-
-        .logo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            border: 5px solid #9c27b0;
-            box-shadow: 0 8px 40px rgba(156, 39, 176, 0.4);
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 4em;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            margin-bottom: 15px;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .banner {
-            width: auto;
-            max-width: 95%;
-            height: auto;
-            margin: 30px auto 40px;
-            display: block;
-            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
-            opacity: 0.9;
-        }
-
-        @media(max-width: 767px) {
-            .banner {
-                max-width: 100%;
-                margin: 20px auto 30px;
-            }
-        }
-
-        @media(min-width: 768px) and (max-width: 1023px) {
-            .banner {
-                max-width: 85%;
-                margin: 25px auto 35px;
-            }
-        }
-
-        @media(min-width: 1024px) {
-            .banner {
-                max-width: 1200px;
-                width: auto;
-                margin: 30px auto 40px;
-            }
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            padding: 50px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            border: 3px solid #ce93d8;
-            text-align: center;
-            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3);
-        }
-
-        .stat-label {
-            font-size: 1em;
-            color: #7b1fa2;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #6a1b9a;
-        }
-
-        .buy-section {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3em;
-            color: #6a1b9a;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 8px rgba(106, 27, 154, 0.2);
-            font-weight: bold;
-        }
-
-        .buy-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .buy-card {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            border: 3px solid #ce93d8;
-            text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
-        }
-
-        .buy-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(156, 39, 176, 0.35);
-        }
-
-        .buy-card h3 {
-            color: #6a1b9a;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .buy-card p {
-            color: #7b1fa2;
-            margin-bottom: 25px;
-            font-size: 1em;
-        }
-
-        .buy-btn {
-            display: inline-block;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #ab47bc, #ce93d8);
-            border: none;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.1em;
-        }
-
-        .buy-btn:hover {
-            background: linear-gradient(135deg, #9c27b0, #ba68c8);
-            transform: scale(1.05);
-        }
-
-        .storybook-section {
-            max-width: 900px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        .cards-container {
-            position: relative;
-            height: 700px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card-stack {
-            position: relative;
-            width: 600px;
-            height: 550px;
-            margin-bottom: 50px;
-            cursor: pointer;
-        }
-
-        .story-card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.2) 0%, 
-                rgba(255, 255, 255, 0.1) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .card-title {
-            font-size: 2.2em;
-            font-weight: bold;
-            color: #000000;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-        }
-
-        .card-count {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #000000;
-            text-shadow: none;
-        }
-
-        .card-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .card-body p {
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1.3em;
-            color: #000000;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-            text-align: left;
-        }
-
-        .card-highlight {
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.4em;
-            color: #000000;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-        }
-
-        .swipe-instructions {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.2em;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .chart-section {
-            max-width: 1400px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        #dexscreener-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 200%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3);
-            border: 3px solid #ce93d8;
-        }
-
-        @media(min-width: 768px) and (max-width: 1023px) {
-            #dexscreener-embed {
-                padding-bottom: 150%;
-            }
-        }
-
-        @media(min-width: 1024px) {
-            #dexscreener-embed {
-                padding-bottom: 65%;
-            }
-        }
-
-        #dexscreener-embed iframe {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border: 0;
-        }
-
-        .nft-section {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        .nft-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .nft-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            border: 3px solid #ce93d8;
-            text-align: center;
-            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2);
-            transition: all 0.3s;
-        }
-
-        .nft-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3);
-        }
-
-        .nft-card h3 {
-            color: #6a1b9a;
-            font-size: 2em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .nft-description, .burn-description {
-            color: #7b1fa2;
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .burn-card {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffe6f0 100%);
-        }
-
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .timer-box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid #ce93d8;
-            min-width: 100px;
-            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2);
-        }
-
-        .timer-value {
-            display: block;
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #6a1b9a;
-            margin-bottom: 5px;
-        }
-
-        .timer-label {
-            display: block;
-            font-size: 0.9em;
-            color: #7b1fa2;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(186, 104, 200, 0.15);
-            border-top: 3px solid #ab47bc;
-            margin-top: 80px;
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .social-btn {
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #ab47bc, #ce93d8);
-            border: none;
-            border-radius: 30px;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4);
-            font-size: 1.1em;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6);
-            background: linear-gradient(135deg, #9c27b0, #ba68c8);
-        }
-
-        .token-address {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px auto;
-            max-width: 650px;
-            word-break: break-all;
-            font-family: monospace;
-            font-size: 1em;
-            color: #6a1b9a;
-            border: 3px solid #ce93d8;
-            box-shadow: 0 4px 20px rgba(156, 39, 176, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            
-            .card-stack {
-                width: 90vw;
-                max-width: 450px;
-                height: 500px;
-            }
-            
-            .story-card {
-                padding: 30px;
-            }
-            
-            .card-title {
-                font-size: 1.8em;
-            }
-            
-            .card-body p {
-                font-size: 1.1em;
-            }
-
-            .section-title {
-                font-size: 2.2em;
-            }
-
-            .storybook-section {
-                max-width: 500px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #be88f4; color: #4a148c; overflow-x: hidden; }
+        .header { text-align: center; padding: 60px 20px; background: rgba(186, 104, 200, 0.15); }
+        .logo { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 30px; border: 5px solid #9c27b0; box-shadow: 0 8px 40px rgba(156, 39, 176, 0.4); object-fit: cover; }
+        h1 { font-size: 4em; color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); margin-bottom: 15px; font-weight: bold; letter-spacing: 3px; }
+        .banner { width: auto; max-width: 95%; height: auto; margin: 30px auto 40px; display: block; filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2)); opacity: 0.9; }
+        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 50px 20px; max-width: 1400px; margin: 0 auto; }
+        .stat-card { background: white; padding: 30px; border-radius: 20px; border: 3px solid #ce93d8; text-align: center; box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2); transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3); }
+        .stat-label { font-size: 1em; color: #7b1fa2; margin-bottom: 15px; font-weight: 600; }
+        .stat-value { font-size: 2em; font-weight: bold; color: #6a1b9a; }
+        .buy-section { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 3em; color: #ffffff; margin-bottom: 40px; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); font-weight: bold; }
+        .buy-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .buy-card { background: white; padding: 35px; border-radius: 20px; border: 3px solid #ce93d8; text-align: center; transition: all 0.3s; box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2); }
+        .buy-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(156, 39, 176, 0.35); }
+        .buy-card h3 { color: #6a1b9a; margin-bottom: 15px; font-size: 1.5em; }
+        .buy-card p { color: #7b1fa2; margin-bottom: 25px; font-size: 1em; }
+        .buy-btn { display: inline-block; padding: 14px 35px; background: linear-gradient(135deg, #ab47bc, #ce93d8); border: none; border-radius: 30px; color: white; font-weight: bold; text-decoration: none; transition: all 0.3s; font-size: 1.1em; }
+        .buy-btn:hover { background: linear-gradient(135deg, #9c27b0, #ba68c8); transform: scale(1.05); }
+        .storybook-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
+        .cards-container { position: relative; height: 700px; display: flex; flex-direction: column; align-items: center; }
+        .card-stack { position: relative; width: 600px; height: 550px; margin-bottom: 50px; cursor: pointer; }
+        .story-card { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%); backdrop-filter: blur(20px); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); cursor: pointer; user-select: none; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .card-title { font-size: 2.2em; font-weight: bold; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); }
+        .card-count { background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; font-weight: bold; color: #000000; text-shadow: none; }
+        .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .card-body p { line-height: 1.8; margin-bottom: 25px; font-size: 1.3em; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); text-align: left; }
+        .card-highlight { text-align: center; font-weight: bold; font-size: 1.4em; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.2); border-radius: 15px; }
+        .swipe-instructions { color: rgba(255, 255, 255, 0.7); font-size: 1.2em; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); text-align: center; }
+        .chart-section { max-width: 1400px; margin: 80px auto; padding: 0 20px; }
+        #dexscreener-embed { position: relative; width: 100%; padding-bottom: 200%; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3); border: 3px solid #ce93d8; }
+        @media(min-width: 768px) and (max-width: 1023px) { #dexscreener-embed { padding-bottom: 150%; } }
+        @media(min-width: 1024px) { #dexscreener-embed { padding-bottom: 65%; } }
+        #dexscreener-embed iframe { position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: 0; }
+        .nft-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .nft-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .nft-card { background: white; padding: 40px; border-radius: 20px; border: 3px solid #ce93d8; text-align: center; box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2); transition: all 0.3s; }
+        .nft-card:hover { transform: translateY(-5px); box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3); }
+        .nft-card h3 { color: #6a1b9a; font-size: 2em; margin-bottom: 20px; font-weight: bold; }
+        .nft-description, .burn-description { color: #7b1fa2; font-size: 1.2em; line-height: 1.8; margin-bottom: 20px; }
+        .burn-card { background: linear-gradient(135deg, #fff5f5 0%, #ffe6f0 100%); }
+        .countdown-timer { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+        .timer-box { background: white; padding: 20px; border-radius: 15px; border: 3px solid #ce93d8; min-width: 100px; box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2); }
+        .timer-value { display: block; font-size: 2.5em; font-weight: bold; color: #6a1b9a; margin-bottom: 5px; }
+        .timer-label { display: block; font-size: 0.9em; color: #7b1fa2; font-weight: 600; text-transform: uppercase; }
+        .footer { text-align: center; padding: 50px 20px; background: rgba(186, 104, 200, 0.15); border-top: 3px solid #ab47bc; margin-top: 80px; }
+        .socials { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { padding: 15px 35px; background: linear-gradient(135deg, #ab47bc, #ce93d8); border: none; border-radius: 30px; color: white; font-weight: bold; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4); font-size: 1.1em; }
+        .social-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6); background: linear-gradient(135deg, #9c27b0, #ba68c8); }
+        .token-address { background: white; padding: 20px; border-radius: 15px; margin: 20px auto; max-width: 650px; word-break: break-all; font-family: monospace; font-size: 1em; color: #6a1b9a; border: 3px solid #ce93d8; box-shadow: 0 4px 20px rgba(156, 39, 176, 0.2); }
+        @media (max-width: 768px) { h1 { font-size: 2.5em; } .card-stack { width: 90vw; max-width: 450px; height: 500px; } .story-card { padding: 30px; } .card-title { font-size: 1.8em; } .card-body p { font-size: 1.1em; } .section-title { font-size: 2.2em; } .storybook-section { max-width: 500px; } }
     </style>
 </head>
 <body>
@@ -487,19 +69,19 @@
 
     <div class="stats-container">
         <div class="stat-card">
-            <div class="stat-label">💰 Market Cap</div>
+            <div class="stat-label">&#128176; Market Cap</div>
             <div class="stat-value" id="marketcap">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">🔗 Trustlines</div>
+            <div class="stat-label">&#128279; Trustlines</div>
             <div class="stat-value" id="trustlines">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">👥 Holders</div>
+            <div class="stat-label">&#128101; Holders</div>
             <div class="stat-value" id="holders">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">📊 Total Supply</div>
+            <div class="stat-label">&#128202; Total Supply</div>
             <div class="stat-value">100M</div>
         </div>
     </div>
@@ -526,11 +108,10 @@
     </div>
 
     <div class="storybook-section">
-        <h2 class="section-title">🃏 The Mallard Story</h2>
-        
+        <h2 class="section-title">&#127183; The Mallard Story</h2>
         <div class="cards-container">
             <div class="card-stack" id="cardStack">
-                <div class="story-card" data-index="3" id="card3" onclick="cardClicked(event)">
+                <div class="story-card" data-index="3" id="card3">
                     <div class="card-header">
                         <span class="card-title">Join the Flock</span>
                         <span class="card-count">4/4</span>
@@ -538,11 +119,10 @@
                     <div class="card-body">
                         <p>Three ducks across three posts. Old MacDonald, Telegram emoji, Music video.</p>
                         <p>321... 123. David's ducks are in a row. The duck is loose.</p>
-                        <div class="card-highlight">🦆 Welcome to the Movement 🦆</div>
+                        <div class="card-highlight">&#129414; Welcome to the Movement &#129414;</div>
                     </div>
                 </div>
-                
-                <div class="story-card" data-index="2" id="card2" onclick="cardClicked(event)">
+                <div class="story-card" data-index="2" id="card2">
                     <div class="card-header">
                         <span class="card-title">David Watches</span>
                         <span class="card-count">3/4</span>
@@ -552,8 +132,7 @@
                         <p>Then... a mysterious "@joelkatz" joined our Telegram. The creator of XRP Ledger was watching.</p>
                     </div>
                 </div>
-                
-                <div class="story-card" data-index="1" id="card1" onclick="cardClicked(event)">
+                <div class="story-card" data-index="1" id="card1">
                     <div class="card-header">
                         <span class="card-title">Community Awakens</span>
                         <span class="card-count">2/4</span>
@@ -563,8 +142,7 @@
                         <p>Raids began. Energy built fast. This wasn't just a meme coin anymore—it was a movement.</p>
                     </div>
                 </div>
-                
-                <div class="story-card active" data-index="0" id="card0" onclick="cardClicked(event)">
+                <div class="story-card active" data-index="0" id="card0">
                     <div class="card-header">
                         <span class="card-title">The Beginning</span>
                         <span class="card-count">1/4</span>
@@ -575,29 +153,28 @@
                     </div>
                 </div>
             </div>
-            
             <div class="swipe-instructions">
-                <span>👈 Click left or right to navigate 👉</span>
+                <span>&#128072; Click left or right to navigate &#128073;</span>
             </div>
         </div>
     </div>
 
     <div class="chart-section">
-        <h2 class="section-title">📈 Live Chart</h2>
+        <h2 class="section-title">&#128200; Live Chart</h2>
         <div id="dexscreener-embed">
             <iframe src="https://dexscreener.com/xrpl/4D414C4C41524400000000000000000000000000.raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN_XRP?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
         </div>
     </div>
 
     <div class="nft-section">
-        <h2 class="section-title">🎨 NFT</h2>
+        <h2 class="section-title">&#127912; NFT</h2>
         <div class="nft-container">
             <div class="nft-card">
                 <h3>Coming Soon</h3>
                 <p class="nft-description">Exciting NFT drops are on the horizon. Stay tuned for updates!</p>
             </div>
             <div class="nft-card burn-card">
-                <h3>🔥 Burn Your V2 Mallard NFTs</h3>
+                <h3>&#128293; Burn Your V2 Mallard NFTs</h3>
                 <p class="burn-description">Deadline for burn within:</p>
                 <div class="countdown-timer" id="countdown">
                     <div class="timer-box">
@@ -618,32 +195,30 @@
     </div>
 
     <div class="footer">
-        <h3 style="color: #6a1b9a; font-size: 2em; margin-bottom: 30px;">Join the Flock 🦆</h3>
-        
+        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Join the Flock &#129414;</h3>
         <div class="socials">
-            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">📱 Telegram</a>
-            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">🐦 Twitter/X</a>
-            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">🎵 TikTok</a>
-            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">▶️ YouTube</a>
-            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">📸 Instagram</a>
-            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">🔗 Linktree</a>
-            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">🔍 XRPScan</a>
+            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">&#128241; Telegram</a>
+            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">&#128038; Twitter/X</a>
+            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">&#127925; TikTok</a>
+            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">&#9654;&#65039; YouTube</a>
+            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">&#128248; Instagram</a>
+            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">&#128279; Linktree</a>
+            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">&#128269; XRPScan</a>
         </div>
-
-        <h3 style="color: #6a1b9a; font-size: 2em; margin-bottom: 20px; margin-top: 50px;">Token Address</h3>
-        <div class="token-address">
-            raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN
-        </div>
+        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 20px; margin-top: 50px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Token Address</h3>
+        <div class="token-address">raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN</div>
         <p style="margin-top: 20px; color: #7b1fa2; font-weight: 600;">Contract: 4D414C4C41524400000000000000000000000000</p>
-        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">© 2025 Mallard | The Duck That Became a Legend 🦆</p>
+        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">&#169; 2025 Mallard | The Duck That Became a Legend &#129414;</p>
     </div>
 
+    <script src="https://unpkg.com/xrpl@4.2.1/build/xrpl-latest-min.js"></script>
     <script>
-        var currentCard = 3;
+        // Story Card Navigation
+        let currentCard = 3;
         
         function updateCards() {
-            for (var i = 0; i <= 3; i++) {
-                var card = document.getElementById('card' + i);
+            for (let i = 0; i <= 3; i++) {
+                const card = document.getElementById('card' + i);
                 if (card) {
                     if (i === currentCard) {
                         card.style.zIndex = '10';
@@ -680,41 +255,41 @@
             updateCards();
         }
         
-        function cardClicked(event) {
-            var stack = document.getElementById('cardStack');
-            var rect = stack.getBoundingClientRect();
-            var clickX = event.clientX - rect.left;
-            var width = rect.width;
-            
-            if (clickX < width / 2) {
-                prevCard();
-            } else {
-                nextCard();
-            }
-        }
+        document.querySelectorAll('.story-card').forEach(card => {
+            card.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const stack = document.getElementById('cardStack');
+                const rect = stack.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                if (clickX < rect.width / 2) {
+                    prevCard();
+                } else {
+                    nextCard();
+                }
+            });
+        });
         
-        document.onkeydown = function(e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
                 prevCard();
             } else if (e.key === 'ArrowRight') {
                 nextCard();
             }
-        };
+        });
         
-        setTimeout(function() {
-            updateCards();
-        }, 100);
+        setTimeout(updateCards, 100);
 
+        // Countdown Timer
         function updateCountdown() {
-            var deadline = new Date('2025-10-15T00:00:00Z').getTime();
-            var now = new Date().getTime();
-            var timeLeft = deadline - now;
-
+            const deadline = new Date('2025-10-15T00:00:00Z').getTime();
+            const now = new Date().getTime();
+            const timeLeft = deadline - now;
+            
             if (timeLeft > 0) {
-                var hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
                 document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
@@ -724,67 +299,172 @@
                 document.getElementById('seconds').textContent = '00';
             }
         }
-
+        
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        function loadData() {
-            fetch('https://api.dexscreener.com/latest/dex/search?q=MALLARD')
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    if (data && data.pairs && data.pairs.length > 0) {
-                        var pair = data.pairs[0];
-                        var mcap = parseFloat(pair.fdv) || parseFloat(pair.marketCap) || 0;
-                        
-                        if (mcap >= 1000000) {
-                            document.getElementById('marketcap').textContent = '$' + (mcap / 1000000).toFixed(2) + 'M';
-                        } else if (mcap >= 1000) {
-                            document.getElementById('marketcap').textContent = '$' + (mcap / 1000).toFixed(2) + 'K';
-                        } else {
-                            document.getElementById('marketcap').textContent = '$' + mcap.toFixed(2);
+        // Load Live Data from Blockchain
+        async function loadLiveData() {
+            console.log('?? Fetching live data from XRPL blockchain...');
+            
+            const CURRENCY = '4D414C4C41524400000000000000000000000000';
+            const ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
+            let circulatingSupply = 100000000;
+            
+            try {
+                const client = new xrpl.Client('wss://xrplcluster.com');
+                await client.connect();
+                console.log('? Connected to XRPL');
+                
+                // Get Circulating Supply using gateway_balances
+                try {
+                    console.log('?? Fetching circulating supply...');
+                    const gatewayBalance = await client.request({
+                        command: 'gateway_balances',
+                        account: ISSUER,
+                        ledger_index: 'validated'
+                    });
+                    
+                    if (gatewayBalance && gatewayBalance.result && gatewayBalance.result.obligations) {
+                        const obligations = gatewayBalance.result.obligations;
+                        for (let currency in obligations) {
+                            circulatingSupply = parseFloat(obligations[currency]);
+                            console.log('? Circulating Supply:', circulatingSupply);
+                            break;
                         }
                     }
-                })
-                .catch(function(error) {
-                    console.log('Error:', error);
-                    document.getElementById('marketcap').textContent = 'N/A';
+                } catch (error) {
+                    console.log('?? gateway_balances not available, using total supply');
+                }
+                
+                // Get Trustlines & Holders using account_lines
+                console.log('?? Fetching trustlines and holders...');
+                const accountLines = await client.request({
+                    command: 'account_lines',
+                    account: ISSUER,
+                    ledger_index: 'validated',
+                    limit: 400
                 });
+                
+                if (accountLines && accountLines.result && accountLines.result.lines) {
+                    const mallardLines = accountLines.result.lines.filter(line => 
+                        line.currency === CURRENCY
+                    );
+                    
+                    const trustlineCount = mallardLines.length;
+                    const holderCount = mallardLines.filter(line => 
+                        parseFloat(line.balance || 0) > 0
+                    ).length;
+                    
+                    document.getElementById('trustlines').textContent = trustlineCount.toLocaleString();
+                    document.getElementById('holders').textContent = holderCount.toLocaleString();
+                    
+                    console.log('? Trustlines:', trustlineCount);
+                    console.log('? Holders:', holderCount);
+                }
+                
+                await client.disconnect();
+                console.log('?? Disconnected from XRPL');
+                
+            } catch (error) {
+                console.error('? XRPL Error:', error);
+                document.getElementById('trustlines').textContent = 'Error';
+                document.getElementById('holders').textContent = 'Error';
+            }
+            
+           <script src="https://unpkg.com/xrpl@4.2.1/build/xrpl-latest-min.js"></script>
+<script>
+    // XRPL Token Info
+    const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
+    const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
 
-            fetch('https://api.xrpscan.com/api/v1/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN/trustlines')
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    if (data && data.trustlines) {
-                        var lines = data.trustlines.filter(function(line) {
-                            return line.currency === '4D414C4C41524400000000000000000000000000';
-                        });
+    // ?? Fetch Trustlines + Holders + Supply from XRPL
+    async function loadLiveData() {
+        console.log('?? Fetching trustlines & holders from XRPL...');
+        try {
+            const client = new xrpl.Client('wss://xrplcluster.com');
+            await client.connect();
+
+            // Get Trustlines & Holders
+            const accountLines = await client.request({
+                command: 'account_lines',
+                account: MALLARD_ISSUER,
+                ledger_index: 'validated',
+                limit: 400
+            });
+
+            if (accountLines?.result?.lines) {
+                const mallardLines = accountLines.result.lines.filter(line => line.currency === MALLARD_CURRENCY);
+                
+                const trustlineCount = mallardLines.length;
+                const holderCount = mallardLines.filter(line => parseFloat(line.balance || 0) > 0).length;
+                
+                document.getElementById('trustlines').textContent = trustlineCount.toLocaleString();
+                document.getElementById('holders').textContent = holderCount.toLocaleString();
+            }
+
+            await client.disconnect();
+            console.log('? XRPL data updated');
+        } catch (error) {
+            console.error('? XRPL Error:', error);
+            document.getElementById('trustlines').textContent = 'Error';
+            document.getElementById('holders').textContent = 'Error';
+        }
+    }
+
+    // ?? Fetch Market Cap from DexScreener
+    async function fetchMarketCap() {
+        try {
+            const searches = [
+                `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
+                'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
+                `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
+            ];
+
+            for (let url of searches) {
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    let pairs = data.pairs || (data.pair ? [data.pair] : []);
+                    for (let pair of pairs) {
+                        if (!pair) continue;
                         
-                        var count = lines.length;
-                        var holders = lines.filter(function(line) {
-                            return parseFloat(line.balance || 0) > 0;
-                        }).length;
+                        const isXRPL = pair.chainId === 'xrpl' || 
+                                      pair.dexId === 'xrpl' ||
+                                      (pair.baseToken?.address?.includes(MALLARD_ISSUER));
                         
-                        document.getElementById('trustlines').textContent = count.toLocaleString();
-                        document.getElementById('holders').textContent = holders.toLocaleString();
+                        if (isXRPL) {
+                            const marketCap = pair.fdv || pair.marketCap;
+                            if (marketCap && marketCap > 0) {
+                                let formatted;
+                                if (marketCap >= 1_000_000) {
+                                    formatted = '$' + (marketCap / 1_000_000).toFixed(2) + 'M';
+                                } else if (marketCap >= 1_000) {
+                                    formatted = '$' + (marketCap / 1_000).toFixed(2) + 'K';
+                                } else {
+                                    formatted = '$' + marketCap.toFixed(2);
+                                }
+                                document.getElementById('marketcap').textContent = formatted;
+                                return;
+                            }
+                        }
                     }
-                })
-                .catch(function(error) {
-                    console.log('Error:', error);
-                    document.getElementById('trustlines').textContent = '2,500+';
-                    document.getElementById('holders').textContent = '1,800+';
-                });
+                } catch (err) {
+                    continue;
+                }
+            }
+            document.getElementById('marketcap').textContent = 'Coming Soon';
+        } catch (error) {
+            document.getElementById('marketcap').textContent = 'Coming Soon';
         }
+    }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadData);
-        } else {
-            loadData();
-        }
-
-        setInterval(loadData, 60000);
-    </script>
+    // ?? Auto-refresh every 30s
+    loadLiveData();
+    fetchMarketCap();
+    setInterval(loadLiveData, 30000);
+    setInterval(fetchMarketCap, 30000);
+</script>
 </body>
 </html>
