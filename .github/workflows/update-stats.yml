@@ -14,8 +14,27 @@ jobs:
       - name: Fetch Bithomp Data
         run: |
           curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
-               "https://bithomp.com/api/v2/token/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN%2B4D414C4C41524400000000000000000000000000" \
-               > stats.json
+               "https://bithomp.com/api/v2/tokens?issuer=raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN&currency=4D414C4C41524400000000000000000000000000&limit=1" \
+               > temp.json
+          
+          cat temp.json | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          tokens = data.get('tokens', [])
+          
+          if tokens:
+              token = tokens[0]
+              result = {
+                  'trustlines': token.get('trustlines', 0),
+                  'holders': token.get('holders', 0),
+                  'supply': str(token.get('supply', 0)),
+                  'marketCap': str(token.get('marketCap', 0))
+              }
+          else:
+              result = {'error': 'Token not found'}
+          
+          print(json.dumps(result))
+          " > stats.json
           
           cat stats.json
       
