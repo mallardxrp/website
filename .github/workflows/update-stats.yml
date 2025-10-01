@@ -14,8 +14,23 @@ jobs:
       - name: Fetch Bithomp Data
         run: |
           curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
-               https://bithomp.com/api/v2/token/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN/4D414C4C41524400000000000000000000000000 \
-               > stats.json
+               "https://bithomp.com/api/v2/address/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN?obligations=true" \
+               > temp.json
+          
+          cat temp.json | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          obligations = data.get('obligations', {})
+          tokens = obligations.get('tokens', [])
+          
+          result = {
+              'trustlines': obligations.get('trustlines', 0),
+              'holders': obligations.get('holders', 0),
+              'supply': str(sum([float(t.get('value', 0)) for t in tokens])),
+              'marketCap': '0'
+          }
+          print(json.dumps(result))
+          " > stats.json
       
       - name: Commit and Push
         run: |
