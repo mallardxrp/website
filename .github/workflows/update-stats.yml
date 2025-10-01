@@ -5,6 +5,9 @@ on:
     - cron: "*/15 * * * *"   # every 15 minutes
   workflow_dispatch:         # allow manual trigger
 
+permissions:
+  contents: write   # ✅ allows Actions bot to push changes
+
 jobs:
   update-stats:
     runs-on: ubuntu-latest
