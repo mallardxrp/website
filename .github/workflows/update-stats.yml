@@ -14,8 +14,10 @@ jobs:
       - name: Fetch Bithomp Data
         run: |
           curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
-               "https://bithomp.com/api/v2/token/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN+4D414C4C41524400000000000000000000000000" \
+               "https://bithomp.com/api/v2/token/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN%2B4D414C4C41524400000000000000000000000000" \
                > stats.json
+          
+          cat stats.json
       
       - name: Commit and Push
         run: |
