@@ -1,47 +1,30 @@
-name: Update Stats
+name: Update XRPL Stats
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: "*/15 * * * *"   # every 15 minutes
   workflow_dispatch:
 
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Fetch Bithomp Data
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Run stats generator
+        run: node generateStats.js
+
+      - name: Commit & Push stats.json
         run: |
-          curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
-               "https://bithomp.com/api/v2/tokens?issuer=raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN&currency=4D414C4C41524400000000000000000000000000&limit=1" \
-               > temp.json
-          
-          cat temp.json | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          tokens = data.get('tokens', [])
-          
-          if tokens:
-              token = tokens[0]
-              result = {
-                  'trustlines': token.get('trustlines', 0),
-                  'holders': token.get('holders', 0),
-                  'supply': str(token.get('supply', 0)),
-                  'marketCap': str(token.get('marketCap', 0))
-              }
-          else:
-              result = {'error': 'Token not found'}
-          
-          print(json.dumps(result))
-          " > stats.json
-          
-          cat stats.json
-      
-      - name: Commit and Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update stats"
+          git commit -m "Auto-update stats.json [skip ci]" || echo "No changes"
           git push
