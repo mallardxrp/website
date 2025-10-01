@@ -2,11 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$MALLARD - The Duck That Became a Legend</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #be88f4; color: #4a148c; overflow-x: hidden; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #d5a5f5 0%, #be88f4 25%, #a86cd1 50%, #be88f4 75%, #d5a5f5 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #4a148c; 
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .header, .stats-container, .buy-section, .storybook-section, .chart-section, .nft-section, .footer {
+            position: relative;
+            z-index: 1;
+        }
         .header { text-align: center; padding: 60px 20px; background: rgba(186, 104, 200, 0.15); }
         .logo { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 30px; border: 5px solid #9c27b0; box-shadow: 0 8px 40px rgba(156, 39, 176, 0.4); object-fit: cover; }
         h1 { font-size: 4em; color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); margin-bottom: 15px; font-weight: bold; letter-spacing: 3px; }
@@ -69,20 +101,20 @@
 
     <div class="stats-container">
         <div class="stat-card">
-            <div class="stat-label">&#128176; Market Cap</div>
+            <div class="stat-label">?? Market Cap</div>
             <div class="stat-value" id="marketcap">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">&#128279; Trustlines</div>
+            <div class="stat-label">?? Trustlines</div>
             <div class="stat-value" id="trustlines">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">&#128101; Holders</div>
+            <div class="stat-label">?? Holders</div>
             <div class="stat-value" id="holders">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">&#128202; Total Supply</div>
-            <div class="stat-value">100M</div>
+            <div class="stat-label">?? Circulating Supply</div>
+            <div class="stat-value" id="supply">Loading...</div>
         </div>
     </div>
 
@@ -108,28 +140,17 @@
     </div>
 
     <div class="storybook-section">
-        <h2 class="section-title">&#127183; The Mallard Story</h2>
+        <h2 class="section-title">?? The Mallard Story</h2>
         <div class="cards-container">
             <div class="card-stack" id="cardStack">
-                <div class="story-card" data-index="3" id="card3">
+                <div class="story-card" data-index="0" id="card0">
                     <div class="card-header">
-                        <span class="card-title">Join the Flock</span>
-                        <span class="card-count">4/4</span>
+                        <span class="card-title">The Beginning</span>
+                        <span class="card-count">1/4</span>
                     </div>
                     <div class="card-body">
-                        <p>Three ducks across three posts. Old MacDonald, Telegram emoji, Music video.</p>
-                        <p>321... 123. David's ducks are in a row. The duck is loose.</p>
-                        <div class="card-highlight">&#129414; Welcome to the Movement &#129414;</div>
-                    </div>
-                </div>
-                <div class="story-card" data-index="2" id="card2">
-                    <div class="card-header">
-                        <span class="card-title">David Watches</span>
-                        <span class="card-count">3/4</span>
-                    </div>
-                    <div class="card-body">
-                        <p>The community raided @JoelKatz. The dev sent an NFT directly to David's wallet.</p>
-                        <p>Then... a mysterious "@joelkatz" joined our Telegram. The creator of XRP Ledger was watching.</p>
+                        <p>A mysterious NFT drop appeared out of nowhere. No big promos, no whitelist, just vibes.</p>
+                        <p>It all started with a duck... A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
                     </div>
                 </div>
                 <div class="story-card" data-index="1" id="card1">
@@ -142,39 +163,50 @@
                         <p>Raids began. Energy built fast. This wasn't just a meme coin anymore—it was a movement.</p>
                     </div>
                 </div>
-                <div class="story-card active" data-index="0" id="card0">
+                <div class="story-card" data-index="2" id="card2">
                     <div class="card-header">
-                        <span class="card-title">The Beginning</span>
-                        <span class="card-count">1/4</span>
+                        <span class="card-title">David Watches</span>
+                        <span class="card-count">3/4</span>
                     </div>
                     <div class="card-body">
-                        <p>A mysterious NFT drop appeared out of nowhere. No big promos, no whitelist, just vibes.</p>
-                        <p>It all started with a duck... A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
+                        <p>The community raided @JoelKatz. The dev sent an NFT directly to David's wallet.</p>
+                        <p>Then... a mysterious "@joelkatz" joined our Telegram. The creator of XRP Ledger was watching.</p>
+                    </div>
+                </div>
+                <div class="story-card" data-index="3" id="card3">
+                    <div class="card-header">
+                        <span class="card-title">Join the Flock</span>
+                        <span class="card-count">4/4</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Three ducks across three posts. Old MacDonald, Telegram emoji, Music video.</p>
+                        <p>321... 123. David's ducks are in a row. The duck is loose.</p>
+                        <div class="card-highlight">?? Welcome to the Movement ??</div>
                     </div>
                 </div>
             </div>
             <div class="swipe-instructions">
-                <span>&#128072; Click left or right to navigate &#128073;</span>
+                <span>?? Click left or right to navigate ??</span>
             </div>
         </div>
     </div>
 
     <div class="chart-section">
-        <h2 class="section-title">&#128200; Live Chart</h2>
+        <h2 class="section-title">?? Live Chart</h2>
         <div id="dexscreener-embed">
             <iframe src="https://dexscreener.com/xrpl/4D414C4C41524400000000000000000000000000.raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN_XRP?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
         </div>
     </div>
 
     <div class="nft-section">
-        <h2 class="section-title">&#127912; NFT</h2>
+        <h2 class="section-title">?? NFT</h2>
         <div class="nft-container">
             <div class="nft-card">
                 <h3>Coming Soon</h3>
                 <p class="nft-description">Exciting NFT drops are on the horizon. Stay tuned for updates!</p>
             </div>
             <div class="nft-card burn-card">
-                <h3>&#128293; Burn Your V2 Mallard NFTs</h3>
+                <h3>?? Burn Your V2 Mallard NFTs</h3>
                 <p class="burn-description">Deadline for burn within:</p>
                 <div class="countdown-timer" id="countdown">
                     <div class="timer-box">
@@ -195,26 +227,25 @@
     </div>
 
     <div class="footer">
-        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Join the Flock &#129414;</h3>
+        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Join the Flock ??</h3>
         <div class="socials">
-            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">&#128241; Telegram</a>
-            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">&#128038; Twitter/X</a>
-            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">&#127925; TikTok</a>
-            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">&#9654;&#65039; YouTube</a>
-            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">&#128248; Instagram</a>
-            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">&#128279; Linktree</a>
-            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">&#128269; XRPScan</a>
+            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">?? Telegram</a>
+            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">?? Twitter/X</a>
+            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">?? TikTok</a>
+            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">?? YouTube</a>
+            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">?? Instagram</a>
+            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">?? Linktree</a>
+            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">?? XRPScan</a>
         </div>
         <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 20px; margin-top: 50px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Token Address</h3>
         <div class="token-address">raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN</div>
         <p style="margin-top: 20px; color: #7b1fa2; font-weight: 600;">Contract: 4D414C4C41524400000000000000000000000000</p>
-        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">&#169; 2025 Mallard | The Duck That Became a Legend &#129414;</p>
+        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">© 2025 Mallard | The Duck That Became a Legend ??</p>
     </div>
 
-    <script src="https://unpkg.com/xrpl@4.2.1/build/xrpl-latest-min.js"></script>
     <script>
-        // Story Card Navigation
-        let currentCard = 3;
+        // Story Card Navigation - FIXED
+        let currentCard = 0;
         
         function updateCards() {
             for (let i = 0; i <= 3; i++) {
@@ -225,12 +256,12 @@
                         card.style.opacity = '1';
                         card.style.transform = 'scale(1) translateY(0px)';
                         card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    } else if (i === currentCard - 1) {
+                    } else if (i === currentCard + 1) {
                         card.style.zIndex = '8';
                         card.style.opacity = '0.8';
                         card.style.transform = 'scale(0.97) translateY(5px)';
                         card.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                    } else if (i === currentCard - 2) {
+                    } else if (i === currentCard + 2) {
                         card.style.zIndex = '6';
                         card.style.opacity = '0.6';
                         card.style.transform = 'scale(0.94) translateY(10px)';
@@ -255,20 +286,19 @@
             updateCards();
         }
         
-        document.querySelectorAll('.story-card').forEach(card => {
-            card.addEventListener('click', function(event) {
-                event.stopPropagation();
-                const stack = document.getElementById('cardStack');
-                const rect = stack.getBoundingClientRect();
-                const clickX = event.clientX - rect.left;
-                if (clickX < rect.width / 2) {
-                    prevCard();
-                } else {
-                    nextCard();
-                }
-            });
+        // Click navigation
+        const cardStack = document.getElementById('cardStack');
+        cardStack.addEventListener('click', function(event) {
+            const rect = cardStack.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            if (clickX < rect.width / 2) {
+                prevCard();
+            } else {
+                nextCard();
+            }
         });
         
+        // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
                 prevCard();
@@ -277,7 +307,8 @@
             }
         });
         
-        setTimeout(updateCards, 100);
+        // Initialize cards
+        updateCards();
 
         // Countdown Timer
         function updateCountdown() {
@@ -303,168 +334,196 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Load Live Data from Blockchain
+        // XRPL Token Info
+        const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
+        const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
+
+        // Fetch Trustlines + Holders from XRPL using direct JSON-RPC
         async function loadLiveData() {
-            console.log('?? Fetching live data from XRPL blockchain...');
-            
-            const CURRENCY = '4D414C4C41524400000000000000000000000000';
-            const ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
-            let circulatingSupply = 100000000;
+            console.log('?? Fetching trustlines & holders from XRPL...');
             
             try {
-                const client = new xrpl.Client('wss://xrplcluster.com');
-                await client.connect();
-                console.log('? Connected to XRPL');
+                // Use public XRPL JSON-RPC endpoints
+                const rpcEndpoints = [
+                    'https://xrplcluster.com',
+                    'https://s1.ripple.com:51234',
+                    'https://s2.ripple.com:51234'
+                ];
                 
-                // Get Circulating Supply using gateway_balances
-                try {
-                    console.log('?? Fetching circulating supply...');
-                    const gatewayBalance = await client.request({
-                        command: 'gateway_balances',
-                        account: ISSUER,
-                        ledger_index: 'validated'
-                    });
-                    
-                    if (gatewayBalance && gatewayBalance.result && gatewayBalance.result.obligations) {
-                        const obligations = gatewayBalance.result.obligations;
-                        for (let currency in obligations) {
-                            circulatingSupply = parseFloat(obligations[currency]);
-                            console.log('? Circulating Supply:', circulatingSupply);
-                            break;
+                let allLines = [];
+                let marker = undefined;
+                let hasMore = true;
+                let successfulEndpoint = null;
+
+                // Try each endpoint
+                for (const endpoint of rpcEndpoints) {
+                    try {
+                        console.log(`Trying endpoint: ${endpoint}`);
+                        
+                        // Paginate through all account_lines
+                        while (hasMore) {
+                            const request = {
+                                method: 'account_lines',
+                                params: [{
+                                    account: MALLARD_ISSUER,
+                                    ledger_index: 'validated',
+                                    limit: 400
+                                }]
+                            };
+
+                            if (marker) {
+                                request.params[0].marker = marker;
+                            }
+
+                            const response = await fetch(endpoint, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(request)
+                            });
+
+                            const data = await response.json();
+
+                            if (data?.result?.lines) {
+                                // Filter only MALLARD currency lines
+                                const mallardLines = data.result.lines.filter(line => 
+                                    line.currency === MALLARD_CURRENCY
+                                );
+                                allLines = allLines.concat(mallardLines);
+                                
+                                // Debug: log first few lines
+                                if (allLines.length <= 5) {
+                                    console.log('Sample lines:', mallardLines.slice(0, 3));
+                                }
+                            }
+
+                            // Check if there are more pages
+                            marker = data?.result?.marker;
+                            hasMore = marker !== undefined;
                         }
+                        
+                        successfulEndpoint = endpoint;
+                        console.log(`? Successfully fetched data from ${endpoint}`);
+                        break; // Success, exit loop
+                        
+                    } catch (err) {
+                        console.log(`Failed with ${endpoint}:`, err.message);
+                        // Reset for next endpoint attempt
+                        allLines = [];
+                        marker = undefined;
+                        hasMore = true;
+                        continue;
                     }
-                } catch (error) {
-                    console.log('?? gateway_balances not available, using total supply');
                 }
-                
-                // Get Trustlines & Holders using account_lines
-                console.log('?? Fetching trustlines and holders...');
-                const accountLines = await client.request({
-                    command: 'account_lines',
-                    account: ISSUER,
-                    ledger_index: 'validated',
-                    limit: 400
-                });
-                
-                if (accountLines && accountLines.result && accountLines.result.lines) {
-                    const mallardLines = accountLines.result.lines.filter(line => 
-                        line.currency === CURRENCY
-                    );
-                    
-                    const trustlineCount = mallardLines.length;
-                    const holderCount = mallardLines.filter(line => 
-                        parseFloat(line.balance || 0) > 0
-                    ).length;
-                    
-                    document.getElementById('trustlines').textContent = trustlineCount.toLocaleString();
-                    document.getElementById('holders').textContent = holderCount.toLocaleString();
-                    
-                    console.log('? Trustlines:', trustlineCount);
-                    console.log('? Holders:', holderCount);
+
+                if (!successfulEndpoint) {
+                    throw new Error('Could not connect to any XRPL endpoint');
                 }
-                
-                await client.disconnect();
-                console.log('?? Disconnected from XRPL');
-                
-            } catch (error) {
-                console.error('? XRPL Error:', error);
-                document.getElementById('trustlines').textContent = 'Error';
-                document.getElementById('holders').textContent = 'Error';
-            }
-            
-           <script src="https://unpkg.com/xrpl@4.2.1/build/xrpl-latest-min.js"></script>
-<script>
-    // XRPL Token Info
-    const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
-    const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
 
-    // ?? Fetch Trustlines + Holders + Supply from XRPL
-    async function loadLiveData() {
-        console.log('?? Fetching trustlines & holders from XRPL...');
-        try {
-            const client = new xrpl.Client('wss://xrplcluster.com');
-            await client.connect();
-
-            // Get Trustlines & Holders
-            const accountLines = await client.request({
-                command: 'account_lines',
-                account: MALLARD_ISSUER,
-                ledger_index: 'validated',
-                limit: 400
-            });
-
-            if (accountLines?.result?.lines) {
-                const mallardLines = accountLines.result.lines.filter(line => line.currency === MALLARD_CURRENCY);
+                // Count trustlines, holders, and circulating supply
+                const trustlineCount = allLines.length;
                 
-                const trustlineCount = mallardLines.length;
-                const holderCount = mallardLines.filter(line => parseFloat(line.balance || 0) > 0).length;
-                
+                // Holders are accounts where balance is negative (from issuer's perspective)
+                // In account_lines from issuer's view, positive balance means tokens are held by others
+                const holderCount = allLines.filter(line => {
+                    const balance = parseFloat(line.balance || 0);
+                    // Balance can be negative from issuer's perspective, but that means the account holds tokens
+                    return balance !== 0;
+                }).length;
+
+                // Calculate circulating supply (sum of all balances from issuer's perspective)
+                // Negative balances from issuer = positive holdings by users
+                const circulatingSupply = allLines.reduce((sum, line) => {
+                    const balance = parseFloat(line.balance || 0);
+                    // Take absolute value since issuer sees negative, but we want positive supply
+                    return sum + Math.abs(balance);
+                }, 0);
+
+                console.log(`Total lines: ${trustlineCount}, Holders: ${holderCount}, Circulating: ${circulatingSupply.toFixed(0)}`);
+                console.log('Sample balances:', allLines.slice(0, 5).map(l => l.balance));
+
                 document.getElementById('trustlines').textContent = trustlineCount.toLocaleString();
                 document.getElementById('holders').textContent = holderCount.toLocaleString();
+                
+                // Format circulating supply
+                let supplyFormatted;
+                if (circulatingSupply >= 1_000_000) {
+                    supplyFormatted = (circulatingSupply / 1_000_000).toFixed(2) + 'M';
+                } else if (circulatingSupply >= 1_000) {
+                    supplyFormatted = (circulatingSupply / 1_000).toFixed(2) + 'K';
+                } else {
+                    supplyFormatted = circulatingSupply.toFixed(0);
+                }
+                document.getElementById('supply').textContent = supplyFormatted;
+
+                console.log(`? XRPL data updated: ${trustlineCount} trustlines, ${holderCount} holders, ${supplyFormatted} supply`);
+            } catch (error) {
+                console.error('? XRPL Error:', error);
+                document.getElementById('trustlines').textContent = 'Retry...';
+                document.getElementById('holders').textContent = 'Retry...';
+                document.getElementById('supply').textContent = 'Retry...';
+                // Retry after 5 seconds
+                setTimeout(loadLiveData, 5000);
             }
-
-            await client.disconnect();
-            console.log('? XRPL data updated');
-        } catch (error) {
-            console.error('? XRPL Error:', error);
-            document.getElementById('trustlines').textContent = 'Error';
-            document.getElementById('holders').textContent = 'Error';
         }
-    }
 
-    // ?? Fetch Market Cap from DexScreener
-    async function fetchMarketCap() {
-        try {
-            const searches = [
-                `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
-                'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
-                `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
-            ];
+        // Fetch Market Cap from DexScreener
+        async function fetchMarketCap() {
+            try {
+                const searches = [
+                    `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
+                    'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
+                    `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
+                ];
 
-            for (let url of searches) {
-                try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    
-                    let pairs = data.pairs || (data.pair ? [data.pair] : []);
-                    for (let pair of pairs) {
-                        if (!pair) continue;
+                for (let url of searches) {
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
                         
-                        const isXRPL = pair.chainId === 'xrpl' || 
-                                      pair.dexId === 'xrpl' ||
-                                      (pair.baseToken?.address?.includes(MALLARD_ISSUER));
-                        
-                        if (isXRPL) {
-                            const marketCap = pair.fdv || pair.marketCap;
-                            if (marketCap && marketCap > 0) {
-                                let formatted;
-                                if (marketCap >= 1_000_000) {
-                                    formatted = '$' + (marketCap / 1_000_000).toFixed(2) + 'M';
-                                } else if (marketCap >= 1_000) {
-                                    formatted = '$' + (marketCap / 1_000).toFixed(2) + 'K';
-                                } else {
-                                    formatted = '$' + marketCap.toFixed(2);
+                        let pairs = data.pairs || (data.pair ? [data.pair] : []);
+                        for (let pair of pairs) {
+                            if (!pair) continue;
+                            
+                            const isXRPL = pair.chainId === 'xrpl' || 
+                                          pair.dexId === 'xrpl' ||
+                                          (pair.baseToken?.address?.includes(MALLARD_ISSUER));
+                            
+                            if (isXRPL) {
+                                const marketCap = pair.fdv || pair.marketCap;
+                                if (marketCap && marketCap > 0) {
+                                    let formatted;
+                                    if (marketCap >= 1_000_000) {
+                                        formatted = '$' + (marketCap / 1_000_000).toFixed(2) + 'M';
+                                    } else if (marketCap >= 1_000) {
+                                        formatted = '$' + (marketCap / 1_000).toFixed(2) + 'K';
+                                    } else {
+                                        formatted = '$' + marketCap.toFixed(2);
+                                    }
+                                    document.getElementById('marketcap').textContent = formatted;
+                                    return;
                                 }
-                                document.getElementById('marketcap').textContent = formatted;
-                                return;
                             }
                         }
+                    } catch (err) {
+                        continue;
                     }
-                } catch (err) {
-                    continue;
                 }
+                document.getElementById('marketcap').textContent = 'Coming Soon';
+            } catch (error) {
+                document.getElementById('marketcap').textContent = 'Coming Soon';
             }
-            document.getElementById('marketcap').textContent = 'Coming Soon';
-        } catch (error) {
-            document.getElementById('marketcap').textContent = 'Coming Soon';
         }
-    }
 
-    // ?? Auto-refresh every 30s
-    loadLiveData();
-    fetchMarketCap();
-    setInterval(loadLiveData, 30000);
-    setInterval(fetchMarketCap, 30000);
-</script>
+        // Auto-refresh every 30s
+        // Wait for script to load before initializing
+        setTimeout(function() {
+            loadLiveData();
+            fetchMarketCap();
+            setInterval(loadLiveData, 30000);
+            setInterval(fetchMarketCap, 30000);
+        }, 1000);
+    </script>
 </body>
 </html>
