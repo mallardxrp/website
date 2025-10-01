@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$MALLARD - The Duck That Became a Legend</title>
     <style>
@@ -14,30 +13,11 @@
             animation: gradientShift 15s ease infinite;
             color: #4a148c; 
             overflow-x: hidden;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
         }
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-        .header, .stats-container, .buy-section, .storybook-section, .chart-section, .nft-section, .footer {
-            position: relative;
-            z-index: 1;
         }
         .header { text-align: center; padding: 60px 20px; background: rgba(186, 104, 200, 0.15); }
         .logo { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 30px; border: 5px solid #9c27b0; box-shadow: 0 8px 40px rgba(156, 39, 176, 0.4); object-fit: cover; }
@@ -59,37 +39,51 @@
         .buy-btn:hover { background: linear-gradient(135deg, #9c27b0, #ba68c8); transform: scale(1.05); }
         .storybook-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
         .cards-container { position: relative; height: 700px; display: flex; flex-direction: column; align-items: center; }
-        .card-stack { position: relative; width: 600px; height: 550px; margin-bottom: 50px; cursor: pointer; }
-        .story-card { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%); backdrop-filter: blur(20px); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); cursor: pointer; user-select: none; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
+        .card-stack { position: relative; width: 600px; height: 550px; margin-bottom: 30px; }
+        .story-card { 
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); 
+            user-select: none; 
+            transition: transform 0.5s ease, opacity 0.5s ease, z-index 0s;
+            display: flex; 
+            flex-direction: column;
+            cursor: pointer;
+        }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
         .card-title { font-size: 2.2em; font-weight: bold; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); }
-        .card-count { background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; font-weight: bold; color: #000000; text-shadow: none; }
+        .card-count { background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; font-weight: bold; color: #000000; }
         .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .card-body p { line-height: 1.8; margin-bottom: 25px; font-size: 1.3em; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); text-align: left; }
         .card-highlight { text-align: center; font-weight: bold; font-size: 1.4em; color: #000000; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.2); border-radius: 15px; }
-        .swipe-instructions { color: rgba(255, 255, 255, 0.7); font-size: 1.2em; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); text-align: center; }
+        .swipe-instructions { color: rgba(255, 255, 255, 0.9); font-size: 1.2em; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); text-align: center; margin-top: 20px; }
         .chart-section { max-width: 1400px; margin: 80px auto; padding: 0 20px; }
         #dexscreener-embed { position: relative; width: 100%; padding-bottom: 200%; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 50px rgba(156, 39, 176, 0.3); border: 3px solid #ce93d8; }
         @media(min-width: 768px) and (max-width: 1023px) { #dexscreener-embed { padding-bottom: 150%; } }
         @media(min-width: 1024px) { #dexscreener-embed { padding-bottom: 65%; } }
         #dexscreener-embed iframe { position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: 0; }
-        .nft-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-        .nft-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .nft-card { background: white; padding: 40px; border-radius: 20px; border: 3px solid #ce93d8; text-align: center; box-shadow: 0 6px 25px rgba(156, 39, 176, 0.2); transition: all 0.3s; }
-        .nft-card:hover { transform: translateY(-5px); box-shadow: 0 10px 35px rgba(156, 39, 176, 0.3); }
-        .nft-card h3 { color: #6a1b9a; font-size: 2em; margin-bottom: 20px; font-weight: bold; }
-        .nft-description, .burn-description { color: #7b1fa2; font-size: 1.2em; line-height: 1.8; margin-bottom: 20px; }
-        .burn-card { background: linear-gradient(135deg, #fff5f5 0%, #ffe6f0 100%); }
-        .countdown-timer { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
-        .timer-box { background: white; padding: 20px; border-radius: 15px; border: 3px solid #ce93d8; min-width: 100px; box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2); }
-        .timer-value { display: block; font-size: 2.5em; font-weight: bold; color: #6a1b9a; margin-bottom: 5px; }
-        .timer-label { display: block; font-size: 0.9em; color: #7b1fa2; font-weight: 600; text-transform: uppercase; }
         .footer { text-align: center; padding: 50px 20px; background: rgba(186, 104, 200, 0.15); border-top: 3px solid #ab47bc; margin-top: 80px; }
         .socials { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { padding: 15px 35px; background: linear-gradient(135deg, #ab47bc, #ce93d8); border: none; border-radius: 30px; color: white; font-weight: bold; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 20px rgba(171, 71, 188, 0.4); font-size: 1.1em; }
         .social-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 30px rgba(171, 71, 188, 0.6); background: linear-gradient(135deg, #9c27b0, #ba68c8); }
         .token-address { background: white; padding: 20px; border-radius: 15px; margin: 20px auto; max-width: 650px; word-break: break-all; font-family: monospace; font-size: 1em; color: #6a1b9a; border: 3px solid #ce93d8; box-shadow: 0 4px 20px rgba(156, 39, 176, 0.2); }
-        @media (max-width: 768px) { h1 { font-size: 2.5em; } .card-stack { width: 90vw; max-width: 450px; height: 500px; } .story-card { padding: 30px; } .card-title { font-size: 1.8em; } .card-body p { font-size: 1.1em; } .section-title { font-size: 2.2em; } .storybook-section { max-width: 500px; } }
+        @media (max-width: 768px) { 
+            h1 { font-size: 2.5em; } 
+            .card-stack { width: 90vw; max-width: 450px; height: 500px; } 
+            .story-card { padding: 30px; } 
+            .card-title { font-size: 1.8em; } 
+            .card-body p { font-size: 1.1em; } 
+            .section-title { font-size: 2.2em; } 
+            .storybook-section { max-width: 500px; }
+        }
     </style>
 </head>
 <body>
@@ -101,19 +95,19 @@
 
     <div class="stats-container">
         <div class="stat-card">
-            <div class="stat-label">?? Market Cap</div>
+            <div class="stat-label">💰 Market Cap</div>
             <div class="stat-value" id="marketcap">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">?? Trustlines</div>
+            <div class="stat-label">🔗 Trustlines</div>
             <div class="stat-value" id="trustlines">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">?? Holders</div>
+            <div class="stat-label">👥 Holders</div>
             <div class="stat-value" id="holders">Loading...</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">?? Circulating Supply</div>
+            <div class="stat-label">💎 Circulating Supply</div>
             <div class="stat-value" id="supply">Loading...</div>
         </div>
     </div>
@@ -140,10 +134,10 @@
     </div>
 
     <div class="storybook-section">
-        <h2 class="section-title">?? The Mallard Story</h2>
+        <h2 class="section-title">🦆 The Mallard Story</h2>
         <div class="cards-container">
             <div class="card-stack" id="cardStack">
-                <div class="story-card" data-index="0" id="card0">
+                <div class="story-card" id="card0">
                     <div class="card-header">
                         <span class="card-title">The Beginning</span>
                         <span class="card-count">1/4</span>
@@ -153,7 +147,7 @@
                         <p>It all started with a duck... A random reply under a David Schwartz tweet: "If I had a pet duck, I'd name him Mallard Fillmore."</p>
                     </div>
                 </div>
-                <div class="story-card" data-index="1" id="card1">
+                <div class="story-card" id="card1">
                     <div class="card-header">
                         <span class="card-title">Community Awakens</span>
                         <span class="card-count">2/4</span>
@@ -163,7 +157,7 @@
                         <p>Raids began. Energy built fast. This wasn't just a meme coin anymore—it was a movement.</p>
                     </div>
                 </div>
-                <div class="story-card" data-index="2" id="card2">
+                <div class="story-card" id="card2">
                     <div class="card-header">
                         <span class="card-title">David Watches</span>
                         <span class="card-count">3/4</span>
@@ -173,7 +167,7 @@
                         <p>Then... a mysterious "@joelkatz" joined our Telegram. The creator of XRP Ledger was watching.</p>
                     </div>
                 </div>
-                <div class="story-card" data-index="3" id="card3">
+                <div class="story-card" id="card3">
                     <div class="card-header">
                         <span class="card-title">Join the Flock</span>
                         <span class="card-count">4/4</span>
@@ -181,186 +175,134 @@
                     <div class="card-body">
                         <p>Three ducks across three posts. Old MacDonald, Telegram emoji, Music video.</p>
                         <p>321... 123. David's ducks are in a row. The duck is loose.</p>
-                        <div class="card-highlight">?? Welcome to the Movement ??</div>
+                        <div class="card-highlight">🚀 Welcome to the Movement 🚀</div>
                     </div>
                 </div>
             </div>
             <div class="swipe-instructions">
-                <span>?? Click left or right to navigate ??</span>
+                <span>👈 Click the cards or use arrow keys to navigate 👉</span>
             </div>
         </div>
     </div>
 
     <div class="chart-section">
-        <h2 class="section-title">?? Live Chart</h2>
+        <h2 class="section-title">📊 Live Chart</h2>
         <div id="dexscreener-embed">
             <iframe src="https://dexscreener.com/xrpl/4D414C4C41524400000000000000000000000000.raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN_XRP?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
         </div>
     </div>
 
-    <div class="nft-section">
-        <h2 class="section-title">?? NFT</h2>
-        <div class="nft-container">
-            <div class="nft-card">
-                <h3>Coming Soon</h3>
-                <p class="nft-description">Exciting NFT drops are on the horizon. Stay tuned for updates!</p>
-            </div>
-            <div class="nft-card burn-card">
-                <h3>?? Burn Your V2 Mallard NFTs</h3>
-                <p class="burn-description">Deadline for burn within:</p>
-                <div class="countdown-timer" id="countdown">
-                    <div class="timer-box">
-                        <span class="timer-value" id="hours">00</span>
-                        <span class="timer-label">Hours</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="timer-value" id="minutes">00</span>
-                        <span class="timer-label">Minutes</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="timer-value" id="seconds">00</span>
-                        <span class="timer-label">Seconds</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="footer">
-        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Join the Flock ??</h3>
+        <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Join the Flock 🦆</h3>
         <div class="socials">
-            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">?? Telegram</a>
-            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">?? Twitter/X</a>
-            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">?? TikTok</a>
-            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">?? YouTube</a>
-            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">?? Instagram</a>
-            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">?? Linktree</a>
-            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">?? XRPScan</a>
+            <a href="https://t.me/mallardcto" class="social-btn" target="_blank">💬 Telegram</a>
+            <a href="https://x.com/mallardxrp" class="social-btn" target="_blank">🐦 Twitter/X</a>
+            <a href="https://www.tiktok.com/@mallardxrp" class="social-btn" target="_blank">🎵 TikTok</a>
+            <a href="https://www.youtube.com/@mallardxrp" class="social-btn" target="_blank">📺 YouTube</a>
+            <a href="https://www.instagram.com/mallardxrp" class="social-btn" target="_blank">📸 Instagram</a>
+            <a href="https://linktr.ee/mallardxrp" class="social-btn" target="_blank">🔗 Linktree</a>
+            <a href="https://xrpscan.com/account/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN" class="social-btn" target="_blank">🔍 XRPScan</a>
         </div>
         <h3 style="color: #ffffff; font-size: 2em; margin-bottom: 20px; margin-top: 50px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Token Address</h3>
         <div class="token-address">raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN</div>
         <p style="margin-top: 20px; color: #7b1fa2; font-weight: 600;">Contract: 4D414C4C41524400000000000000000000000000</p>
-        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">© 2025 Mallard | The Duck That Became a Legend ??</p>
+        <p style="margin-top: 30px; font-size: 1em; color: #7b1fa2;">© 2025 Mallard | The Duck That Became a Legend 🦆</p>
     </div>
 
     <script>
-        // Story Card Navigation - FIXED
+        // Global variables
+        const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
+        const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
         let currentCard = 0;
-        
+        const totalCards = 4;
+
+        // Story Card Navigation - FIXED
         function updateCards() {
-            for (let i = 0; i <= 3; i++) {
+            for (let i = 0; i < totalCards; i++) {
                 const card = document.getElementById('card' + i);
-                if (card) {
-                    if (i === currentCard) {
-                        card.style.zIndex = '10';
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1) translateY(0px)';
-                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    } else if (i === currentCard + 1) {
-                        card.style.zIndex = '8';
-                        card.style.opacity = '0.8';
-                        card.style.transform = 'scale(0.97) translateY(5px)';
-                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                    } else if (i === currentCard + 2) {
-                        card.style.zIndex = '6';
-                        card.style.opacity = '0.6';
-                        card.style.transform = 'scale(0.94) translateY(10px)';
-                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    } else {
-                        card.style.zIndex = '4';
-                        card.style.opacity = '0.3';
-                        card.style.transform = 'scale(0.9) translateY(20px)';
-                        card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                    }
+                if (!card) continue;
+                
+                if (i === currentCard) {
+                    card.style.zIndex = '10';
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1) translateY(0)';
+                } else if (i === (currentCard + 1) % totalCards) {
+                    card.style.zIndex = '8';
+                    card.style.opacity = '0.7';
+                    card.style.transform = 'scale(0.95) translateY(15px)';
+                } else if (i === (currentCard + 2) % totalCards) {
+                    card.style.zIndex = '6';
+                    card.style.opacity = '0.4';
+                    card.style.transform = 'scale(0.90) translateY(30px)';
+                } else {
+                    card.style.zIndex = '4';
+                    card.style.opacity = '0.2';
+                    card.style.transform = 'scale(0.85) translateY(45px)';
                 }
             }
         }
-        
+
         function nextCard() {
-            currentCard = (currentCard + 1) % 4;
+            currentCard = (currentCard + 1) % totalCards;
             updateCards();
         }
-        
+
         function prevCard() {
-            currentCard = (currentCard - 1 + 4) % 4;
+            currentCard = (currentCard - 1 + totalCards) % totalCards;
             updateCards();
         }
-        
-        // Click navigation
-        const cardStack = document.getElementById('cardStack');
-        cardStack.addEventListener('click', function(event) {
-            const rect = cardStack.getBoundingClientRect();
-            const clickX = event.clientX - rect.left;
-            if (clickX < rect.width / 2) {
+
+        // Click handler
+        document.getElementById('cardStack').onclick = function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            if (x < rect.width / 2) {
                 prevCard();
             } else {
                 nextCard();
             }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') {
-                prevCard();
-            } else if (e.key === 'ArrowRight') {
-                nextCard();
-            }
-        });
-        
-        // Initialize cards
+        };
+
+        // Keyboard handler
+        document.onkeydown = function(e) {
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === 'ArrowRight') nextCard();
+        };
+
+        // Touch handler
+        let touchStartX = 0;
+        const stack = document.getElementById('cardStack');
+        stack.ontouchstart = function(e) {
+            touchStartX = e.touches[0].clientX;
+        };
+        stack.ontouchend = function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            if (touchStartX - touchEndX > 50) nextCard();
+            if (touchEndX - touchStartX > 50) prevCard();
+        };
+
+        // Initialize
         updateCards();
 
-        // Countdown Timer
-        function updateCountdown() {
-            const deadline = new Date('2025-10-15T00:00:00Z').getTime();
-            const now = new Date().getTime();
-            const timeLeft = deadline - now;
-            
-            if (timeLeft > 0) {
-                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-            } else {
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-            }
-        }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // XRPL Token Info
-        const MALLARD_ISSUER = 'raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN';
-        const MALLARD_CURRENCY = '4D414C4C41524400000000000000000000000000';
-
-        // Fetch Trustlines + Holders from XRPL using direct JSON-RPC
-        async function loadLiveData() {
-            console.log('?? Fetching trustlines & holders from XRPL...');
-            
+        // XRPL Data - Fixed circulating supply calculation
+        async function loadXRPLData() {
             try {
-                // Use public XRPL JSON-RPC endpoints
-                const rpcEndpoints = [
+                const endpoints = [
                     'https://xrplcluster.com',
                     'https://s1.ripple.com:51234',
                     'https://s2.ripple.com:51234'
                 ];
                 
                 let allLines = [];
-                let marker = undefined;
-                let hasMore = true;
-                let successfulEndpoint = null;
-
-                // Try each endpoint
-                for (const endpoint of rpcEndpoints) {
+                let success = false;
+                
+                // Try endpoints and paginate
+                for (const endpoint of endpoints) {
                     try {
-                        console.log(`Trying endpoint: ${endpoint}`);
+                        let marker = undefined;
+                        let hasMore = true;
+                        allLines = [];
                         
-                        // Paginate through all account_lines
                         while (hasMore) {
                             const request = {
                                 method: 'account_lines',
@@ -370,160 +312,97 @@
                                     limit: 400
                                 }]
                             };
-
-                            if (marker) {
-                                request.params[0].marker = marker;
-                            }
-
+                            
+                            if (marker) request.params[0].marker = marker;
+                            
                             const response = await fetch(endpoint, {
                                 method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
+                                headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify(request)
                             });
-
+                            
                             const data = await response.json();
-
+                            
                             if (data?.result?.lines) {
-                                // Filter only MALLARD currency lines
-                                const mallardLines = data.result.lines.filter(line => 
-                                    line.currency === MALLARD_CURRENCY
-                                );
+                                const mallardLines = data.result.lines.filter(l => l.currency === MALLARD_CURRENCY);
                                 allLines = allLines.concat(mallardLines);
-                                
-                                // Debug: log first few lines
-                                if (allLines.length <= 5) {
-                                    console.log('Sample lines:', mallardLines.slice(0, 3));
-                                }
                             }
-
-                            // Check if there are more pages
+                            
                             marker = data?.result?.marker;
                             hasMore = marker !== undefined;
                         }
                         
-                        successfulEndpoint = endpoint;
-                        console.log(`? Successfully fetched data from ${endpoint}`);
-                        break; // Success, exit loop
-                        
+                        success = true;
+                        break;
                     } catch (err) {
-                        console.log(`Failed with ${endpoint}:`, err.message);
-                        // Reset for next endpoint attempt
-                        allLines = [];
-                        marker = undefined;
-                        hasMore = true;
                         continue;
                     }
                 }
-
-                if (!successfulEndpoint) {
-                    throw new Error('Could not connect to any XRPL endpoint');
-                }
-
-                // Count trustlines, holders, and circulating supply
-                const trustlineCount = allLines.length;
                 
-                // Holders are accounts where balance is negative (from issuer's perspective)
-                // In account_lines from issuer's view, positive balance means tokens are held by others
-                const holderCount = allLines.filter(line => {
-                    const balance = parseFloat(line.balance || 0);
-                    // Balance can be negative from issuer's perspective, but that means the account holds tokens
-                    return balance !== 0;
-                }).length;
-
-                // Calculate circulating supply (sum of all balances from issuer's perspective)
-                // Negative balances from issuer = positive holdings by users
-                const circulatingSupply = allLines.reduce((sum, line) => {
-                    const balance = parseFloat(line.balance || 0);
-                    // Take absolute value since issuer sees negative, but we want positive supply
-                    return sum + Math.abs(balance);
+                if (!success || allLines.length === 0) {
+                    throw new Error('Failed to fetch data');
+                }
+                
+                // Calculate stats
+                const trustlines = allLines.length;
+                const holders = allLines.filter(l => Math.abs(parseFloat(l.balance || 0)) > 0.01).length;
+                
+                // Circulating supply: sum of negative balances (tokens in circulation from issuer's perspective)
+                const supply = allLines.reduce((sum, l) => {
+                    const balance = parseFloat(l.balance || 0);
+                    // Issuer sees negative when tokens are held by users
+                    return sum + (balance < 0 ? Math.abs(balance) : 0);
                 }, 0);
-
-                console.log(`Total lines: ${trustlineCount}, Holders: ${holderCount}, Circulating: ${circulatingSupply.toFixed(0)}`);
-                console.log('Sample balances:', allLines.slice(0, 5).map(l => l.balance));
-
-                document.getElementById('trustlines').textContent = trustlineCount.toLocaleString();
-                document.getElementById('holders').textContent = holderCount.toLocaleString();
                 
-                // Format circulating supply
-                let supplyFormatted;
-                if (circulatingSupply >= 1_000_000) {
-                    supplyFormatted = (circulatingSupply / 1_000_000).toFixed(2) + 'M';
-                } else if (circulatingSupply >= 1_000) {
-                    supplyFormatted = (circulatingSupply / 1_000).toFixed(2) + 'K';
-                } else {
-                    supplyFormatted = circulatingSupply.toFixed(0);
-                }
-                document.getElementById('supply').textContent = supplyFormatted;
-
-                console.log(`? XRPL data updated: ${trustlineCount} trustlines, ${holderCount} holders, ${supplyFormatted} supply`);
-            } catch (error) {
-                console.error('? XRPL Error:', error);
+                document.getElementById('trustlines').textContent = trustlines.toLocaleString();
+                document.getElementById('holders').textContent = holders.toLocaleString();
+                
+                let supplyText;
+                if (supply >= 1e9) supplyText = (supply / 1e9).toFixed(2) + 'B';
+                else if (supply >= 1e6) supplyText = (supply / 1e6).toFixed(2) + 'M';
+                else if (supply >= 1e3) supplyText = (supply / 1e3).toFixed(2) + 'K';
+                else supplyText = supply.toFixed(0);
+                
+                document.getElementById('supply').textContent = supplyText;
+                
+            } catch (err) {
                 document.getElementById('trustlines').textContent = 'Retry...';
                 document.getElementById('holders').textContent = 'Retry...';
                 document.getElementById('supply').textContent = 'Retry...';
-                // Retry after 5 seconds
-                setTimeout(loadLiveData, 5000);
+                setTimeout(loadXRPLData, 5000);
             }
         }
 
-        // Fetch Market Cap from DexScreener
-        async function fetchMarketCap() {
+        // Market Cap
+        async function loadMarketCap() {
             try {
-                const searches = [
-                    `https://api.dexscreener.com/latest/dex/tokens/${MALLARD_CURRENCY}.${MALLARD_ISSUER}`,
-                    'https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL',
-                    `https://api.dexscreener.com/latest/dex/search/?q=${MALLARD_ISSUER}`
-                ];
-
-                for (let url of searches) {
-                    try {
-                        const response = await fetch(url);
-                        const data = await response.json();
-                        
-                        let pairs = data.pairs || (data.pair ? [data.pair] : []);
-                        for (let pair of pairs) {
-                            if (!pair) continue;
-                            
-                            const isXRPL = pair.chainId === 'xrpl' || 
-                                          pair.dexId === 'xrpl' ||
-                                          (pair.baseToken?.address?.includes(MALLARD_ISSUER));
-                            
-                            if (isXRPL) {
-                                const marketCap = pair.fdv || pair.marketCap;
-                                if (marketCap && marketCap > 0) {
-                                    let formatted;
-                                    if (marketCap >= 1_000_000) {
-                                        formatted = '$' + (marketCap / 1_000_000).toFixed(2) + 'M';
-                                    } else if (marketCap >= 1_000) {
-                                        formatted = '$' + (marketCap / 1_000).toFixed(2) + 'K';
-                                    } else {
-                                        formatted = '$' + marketCap.toFixed(2);
-                                    }
-                                    document.getElementById('marketcap').textContent = formatted;
-                                    return;
-                                }
-                            }
-                        }
-                    } catch (err) {
-                        continue;
+                const url = `https://api.dexscreener.com/latest/dex/search/?q=MALLARD+XRPL`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                const pair = data.pairs?.find(p => p.chainId === 'xrpl' || p.baseToken?.address?.includes(MALLARD_ISSUER));
+                if (pair) {
+                    const mc = pair.fdv || pair.marketCap;
+                    if (mc > 0) {
+                        let text;
+                        if (mc >= 1e6) text = '$' + (mc / 1e6).toFixed(2) + 'M';
+                        else if (mc >= 1e3) text = '$' + (mc / 1e3).toFixed(2) + 'K';
+                        else text = '$' + mc.toFixed(2);
+                        document.getElementById('marketcap').textContent = text;
+                        return;
                     }
                 }
                 document.getElementById('marketcap').textContent = 'Coming Soon';
-            } catch (error) {
+            } catch (err) {
                 document.getElementById('marketcap').textContent = 'Coming Soon';
             }
         }
 
-        // Auto-refresh every 30s
-        // Wait for script to load before initializing
-        setTimeout(function() {
-            loadLiveData();
-            fetchMarketCap();
-            setInterval(loadLiveData, 30000);
-            setInterval(fetchMarketCap, 30000);
-        }, 1000);
+        // Load data
+        loadXRPLData();
+        loadMarketCap();
+        setInterval(loadXRPLData, 60000);
+        setInterval(loadMarketCap, 60000);
     </script>
 </body>
 </html>
