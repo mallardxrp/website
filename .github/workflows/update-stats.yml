@@ -1,0 +1,26 @@
+name: Update Stats
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Fetch Bithomp Data
+        run: |
+          curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
+               https://bithomp.com/api/v2/token/raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN/4D414C4C41524400000000000000000000000000 \
+               > stats.json
+      
+      - name: Commit and Push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add stats.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update stats"
+          git push
