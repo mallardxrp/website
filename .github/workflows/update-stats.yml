@@ -13,7 +13,7 @@ jobs:
       
       - name: Fetch Bithomp Data
         run: |
-          curl -H "x-bithomp-token: ${{ c36cde63-c1db-4633-bc3b-902eb47f7ba4 }}" \
+          curl -H "x-bithomp-token: ${{ secrets.BITHOMP_API_KEY }}" \
                "https://bithomp.com/api/v2/tokens?issuer=raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN&currency=4D414C4C41524400000000000000000000000000&limit=1" \
                > temp.json
           
