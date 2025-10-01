@@ -1,89 +1,81 @@
 import fs from "fs";
+import { Client } from "xrpl";
 
-// 🔧 Replace these with your token details
+// Mallard config
 const ISSUER = "raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN";
-const CURRENCY = "MALLARD"; // currency code
+const CURRENCY = "MALLARD";
+const SUPPLY = 1000000000; // replace with real supply if needed
 
-// XRPL RPC endpoint
-const XRPL_RPC = "https://xrplcluster.com"; 
+// XRPL public servers
+const SERVERS = ["wss://xrplcluster.com", "wss://s1.ripple.com", "wss://s2.ripple.com"];
 
-// Fetch account_lines (trustlines + balances)
-async function fetchXRPLStats() {
-  let trustlines = [];
-  let marker = null;
+// Fetch trustlines + holders
+async function getTrustlinesAndHolders(client) {
+  let trustlines = 0;
+  let holders = 0;
+  let marker;
 
   do {
-    const body = {
-      method: "account_lines",
-      params: [
-        {
-          account: ISSUER,
-          ledger_index: "validated",
-          limit: 400,
-          marker: marker
-        }
-      ]
-    };
-
-    const resp = await fetch(XRPL_RPC, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+    const resp = await client.request({
+      command: "account_lines",
+      account: ISSUER,
+      limit: 400,
+      marker,
     });
-    const data = await resp.json();
-    if (!data.result || !data.result.lines) break;
 
-    trustlines.push(...data.result.lines);
-    marker = data.result.marker;
+    const lines = resp.result.lines || [];
+    trustlines += lines.length;
+    holders += lines.filter(l => parseFloat(l.balance) > 0).length;
+
+    marker = resp.result.marker;
   } while (marker);
 
-  // Filter for your token (HEX or plain code)
-  const filtered = trustlines.filter(
-    l => l.currency === CURRENCY || l.currency.startsWith("4D414C4C415244") // "MALLARD" hex
-  );
-
-  const trustlineCount = filtered.length;
-  const holderCount = filtered.filter(l => parseFloat(l.balance) > 0).length;
-  const supply = filtered.reduce((sum, l) => {
-    const bal = parseFloat(l.balance || 0);
-    return sum + (bal > 0 ? bal : 0);
-  }, 0);
-
-  return { trustlineCount, holderCount, supply };
+  return { trustlines, holders };
 }
 
-// Fetch price from DexScreener
-async function fetchMarketCap(supply) {
-  try {
-    const url = `https://api.dexscreener.com/latest/dex/search?q=${ISSUER}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data.pairs && data.pairs.length > 0) {
-      const priceUsd = parseFloat(data.pairs[0].priceUsd || 0);
-      return priceUsd * supply;
+// Fake marketcap (for demo) → replace with DexScreener if available
+async function getMarketCap() {
+  // Example: price * supply
+  const priceUsd = 0.0001; // replace with live fetch later
+  return priceUsd * SUPPLY;
+}
+
+// Main
+async function main() {
+  let client;
+  for (const server of SERVERS) {
+    try {
+      client = new Client(server);
+      await client.connect();
+      console.log("Connected to:", server);
+      break;
+    } catch (e) {
+      console.log("Server failed:", server);
     }
-    return null;
-  } catch (err) {
-    return null;
   }
-}
 
-async function generateStats() {
-  const xrplStats = await fetchXRPLStats();
-  const marketcap = await fetchMarketCap(xrplStats.supply);
+  if (!client) throw new Error("All XRPL servers failed");
+
+  const { trustlines, holders } = await getTrustlinesAndHolders(client);
+  const marketCap = await getMarketCap();
+
+  await client.disconnect();
 
   const stats = {
     token: CURRENCY,
     issuer: ISSUER,
-    trustlines: xrplStats.trustlineCount,
-    holders: xrplStats.holderCount,
-    circulating_supply: xrplStats.supply,
-    marketcap_usd: marketcap,
-    last_updated: new Date().toISOString()
+    trustlines,
+    holders,
+    supply: SUPPLY,         // ✅ renamed
+    marketCap,              // ✅ renamed
+    last_updated: new Date().toISOString(),
   };
 
   fs.writeFileSync("stats.json", JSON.stringify(stats, null, 2));
   console.log("✅ stats.json updated:", stats);
 }
 
-generateStats();
+main().catch(e => {
+  console.error("❌ Error:", e);
+  process.exit(1);
+});
