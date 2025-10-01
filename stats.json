@@ -1,1 +1,71 @@
-{"trustlines": 0, "holders": 0, "supply": "0", "marketCap": "0"}
+// save as generateStats.js
+import fs from "fs";
+import fetch from "node-fetch";
+import xrpl from "xrpl";
+
+const ISSUER = "raaoPU9crbLGEFCMyh8moNH4gipsHJY3wN";
+const CURRENCY = "MALLARD";
+
+async function fetchXRPLStats() {
+  const client = new xrpl.Client("wss://xrplcluster.com");
+  await client.connect();
+
+  let marker, trustlines = [];
+  do {
+    const resp = await client.request({
+      command: "account_lines",
+      account: ISSUER,
+      ledger_index: "validated",
+      limit: 400,
+      marker
+    });
+    trustlines.push(...resp.result.lines);
+    marker = resp.result.marker;
+  } while (marker);
+
+  const mallardLines = trustlines.filter(l => l.currency === CURRENCY || l.currency.startsWith("4D414C4C415244"));
+  const trustlineCount = mallardLines.length;
+  const holderCount = mallardLines.filter(l => parseFloat(l.balance) > 0).length;
+  const supply = mallardLines.reduce((sum, l) => {
+    const bal = parseFloat(l.balance || 0);
+    return sum + (bal > 0 ? bal : 0);
+  }, 0);
+
+  await client.disconnect();
+  return { trustlineCount, holderCount, supply };
+}
+
+async function fetchMarketCap(supply) {
+  try {
+    const url = `https://api.dexscreener.com/latest/dex/search?q=${ISSUER}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.pairs && data.pairs.length > 0) {
+      const priceUsd = parseFloat(data.pairs[0].priceUsd || 0);
+      return priceUsd * supply;
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+}
+
+async function generateStats() {
+  const xrplStats = await fetchXRPLStats();
+  const marketcap = await fetchMarketCap(xrplStats.supply);
+
+  const stats = {
+    token: CURRENCY,
+    issuer: ISSUER,
+    trustlines: xrplStats.trustlineCount,
+    holders: xrplStats.holderCount,
+    circulating_supply: xrplStats.supply,
+    marketcap_usd: marketcap,
+    last_updated: new Date().toISOString()
+  };
+
+  fs.writeFileSync("stats.json", JSON.stringify(stats, null, 2));
+  console.log("✅ stats.json updated:", stats);
+}
+
+generateStats();
